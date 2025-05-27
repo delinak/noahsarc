@@ -8,23 +8,23 @@ export default function Contact() {
     {
       icon: Phone,
       title: "Call Us",
-      detail: "(316) 530-1515",
+      detail: "(615) 782-1842",
       description: "Speak directly with our caring team about your needs and questions.",
       available: "Monday - Friday, 8:00 AM - 6:00 PM"
     },
     {
       icon: Mail,
       title: "Email Us",
-      detail: "info@noahsarccare.com",
+      detail: "bneway@noahsarccare.com",
       description: "Send us a detailed message and we'll respond within 24 hours.",
       available: "We check email regularly throughout the day"
     },
     {
       icon: MapPin,
-      title: "Visit Our Service Area",
-      detail: "Wichita, Kansas",
-      description: "Proudly serving communities throughout Kansas with quality care.",
-      available: "In-home services available in your area"
+      title: "Visit Our Office",
+      detail: "Nashville, Tennessee",
+      description: "Suite D-106, 2201 Murfreesboro Pike, Nashville TN 37217",
+      available: "Serving Tennessee communities with quality care"
     }
   ];
 

@@ -113,16 +113,16 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
             <div className="space-y-3 text-sm text-gray-300">
               <div className="flex items-center space-x-2">
-                <Phone className="h-4 w-4 text-trust-blue" />
-                <span>(316) 530-1515</span>
+                <Phone className="h-4 w-4 text-royal-purple" />
+                <span>(615) 782-1842</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Mail className="h-4 w-4 text-trust-blue" />
-                <span>info@noahsarccare.com</span>
+                <Mail className="h-4 w-4 text-royal-purple" />
+                <span>bneway@noahsarccare.com</span>
               </div>
               <div className="flex items-start space-x-2">
-                <MapPin className="h-4 w-4 text-trust-blue mt-1" />
-                <span>Wichita, Kansas<br />Serving Kansas Communities</span>
+                <MapPin className="h-4 w-4 text-royal-purple mt-1" />
+                <span>Suite D-106, 2201 Murfreesboro Pike<br />Nashville, TN 37217</span>
               </div>
             </div>
           </div>

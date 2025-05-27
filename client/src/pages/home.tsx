@@ -185,17 +185,17 @@ export default function Home() {
             <div className="text-center">
               <Phone className="h-12 w-12 text-purple-200 mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">Call Us</h3>
-              <p className="text-purple-100">(316) 530-1515</p>
+              <p className="text-purple-100">(615) 782-1842</p>
             </div>
             <div className="text-center">
               <Mail className="h-12 w-12 text-purple-200 mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">Email Us</h3>
-              <p className="text-purple-100">info@noahsarccare.com</p>
+              <p className="text-purple-100">bneway@noahsarccare.com</p>
             </div>
             <div className="text-center">
               <MapPin className="h-12 w-12 text-purple-200 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Service Area</h3>
-              <p className="text-purple-100">Wichita, Kansas</p>
+              <h3 className="text-xl font-semibold mb-2">Nashville Office</h3>
+              <p className="text-purple-100">Suite D-106, 2201 Murfreesboro Pike</p>
             </div>
           </div>
           
