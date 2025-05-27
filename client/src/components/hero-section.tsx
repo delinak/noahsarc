@@ -19,8 +19,8 @@ export default function HeroSection() {
                 <span className="text-trust-blue">Compassionate Care</span>
               </h1>
               <p className="text-xl text-medium-gray leading-relaxed">
-                For over twenty years, we've supported individuals with developmental disabilities. 
-                Now, through Noah's Arc Care, we continue our mission of fostering independence and enhancing lives.
+                Providing quality in-home support services for individuals with intellectual and developmental disabilities, 
+                helping them achieve independence and live fulfilling lives in their communities.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">

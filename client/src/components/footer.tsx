@@ -101,6 +101,11 @@ export default function Footer() {
                   Privacy Policy
                 </a>
               </li>
+              <li>
+                <a href="/admin" className="text-gray-300 hover:text-white transition-colors">
+                  Admin Panel
+                </a>
+              </li>
             </ul>
           </div>
           
@@ -109,7 +114,7 @@ export default function Footer() {
             <div className="space-y-3 text-sm text-gray-300">
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4 text-trust-blue" />
-                <span>(555) 123-4567</span>
+                <span>(316) 530-1515</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-trust-blue" />
@@ -117,7 +122,7 @@ export default function Footer() {
               </div>
               <div className="flex items-start space-x-2">
                 <MapPin className="h-4 w-4 text-trust-blue mt-1" />
-                <span>123 Care Street<br />Community City, ST 12345</span>
+                <span>Wichita, Kansas<br />Serving Kansas Communities</span>
               </div>
             </div>
           </div>
