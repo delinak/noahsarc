@@ -2,23 +2,17 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
+import { Link, useLocation } from "wouter";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-    setIsOpen(false);
-  };
+  const [location] = useLocation();
 
   const navItems = [
-    { label: "Home", id: "home" },
-    { label: "About", id: "about" },
-    { label: "Services", id: "services" },
-    { label: "Contact", id: "contact" },
+    { label: "Home", path: "/" },
+    { label: "About", path: "/about" },
+    { label: "Services", path: "/services" },
+    { label: "Contact", path: "/contact" },
   ];
 
   return (
@@ -27,8 +21,10 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <h1 className="text-2xl font-bold text-trust-blue">Noah's Arc Care</h1>
-              <p className="text-xs text-medium-gray font-medium">Empowering Lives Together</p>
+              <Link href="/">
+                <h1 className="text-2xl font-bold royal-purple cursor-pointer hover:text-purple-700 transition-colors">Noah's Arc Care</h1>
+                <p className="text-xs text-medium-gray font-medium">Empowering Lives Together</p>
+              </Link>
             </div>
           </div>
 
@@ -36,20 +32,23 @@ export default function Navigation() {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
               {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className="text-medium-gray hover:text-trust-blue px-3 py-2 text-sm font-medium transition-colors"
-                >
-                  {item.label}
-                </button>
+                <Link key={item.path} href={item.path}>
+                  <button
+                    className={`px-3 py-2 text-sm font-medium transition-colors ${
+                      location === item.path 
+                        ? 'royal-purple border-b-2 border-purple-600' 
+                        : 'text-medium-gray hover:royal-purple'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                </Link>
               ))}
-              <Button
-                onClick={() => scrollToSection("register")}
-                className="bg-trust-blue text-white hover:bg-blue-700"
-              >
-                Get Started
-              </Button>
+              <Link href="/register">
+                <Button className="bg-royal-purple text-white hover:bg-purple-700">
+                  Get Started
+                </Button>
+              </Link>
             </div>
           </div>
 
@@ -64,20 +63,27 @@ export default function Navigation() {
               <SheetContent side="right" className="w-[250px]">
                 <div className="flex flex-col space-y-4 mt-8">
                   {navItems.map((item) => (
-                    <button
-                      key={item.id}
-                      onClick={() => scrollToSection(item.id)}
-                      className="text-left text-medium-gray hover:text-trust-blue px-3 py-2 text-sm font-medium transition-colors"
-                    >
-                      {item.label}
-                    </button>
+                    <Link key={item.path} href={item.path}>
+                      <button
+                        onClick={() => setIsOpen(false)}
+                        className={`text-left w-full px-3 py-2 text-sm font-medium transition-colors ${
+                          location === item.path 
+                            ? 'royal-purple font-semibold' 
+                            : 'text-medium-gray hover:royal-purple'
+                        }`}
+                      >
+                        {item.label}
+                      </button>
+                    </Link>
                   ))}
-                  <Button
-                    onClick={() => scrollToSection("register")}
-                    className="bg-trust-blue text-white hover:bg-blue-700 mt-4"
-                  >
-                    Get Started
-                  </Button>
+                  <Link href="/register">
+                    <Button
+                      onClick={() => setIsOpen(false)}
+                      className="bg-royal-purple text-white hover:bg-purple-700 mt-4 w-full"
+                    >
+                      Get Started
+                    </Button>
+                  </Link>
                 </div>
               </SheetContent>
             </Sheet>
