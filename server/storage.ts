@@ -1,4 +1,6 @@
 import { users, contactInquiries, clientRegistrations, type User, type InsertUser, type ContactInquiry, type InsertContactInquiry, type ClientRegistration, type InsertClientRegistration } from "@shared/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
@@ -10,69 +12,48 @@ export interface IStorage {
   getClientRegistrations(): Promise<ClientRegistration[]>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<number, User>;
-  private contactInquiries: Map<number, ContactInquiry>;
-  private clientRegistrations: Map<number, ClientRegistration>;
-  private currentUserId: number;
-  private currentInquiryId: number;
-  private currentRegistrationId: number;
-
-  constructor() {
-    this.users = new Map();
-    this.contactInquiries = new Map();
-    this.clientRegistrations = new Map();
-    this.currentUserId = 1;
-    this.currentInquiryId = 1;
-    this.currentRegistrationId = 1;
-  }
-
+export class DatabaseStorage implements IStorage {
   async getUser(id: number): Promise<User | undefined> {
-    return this.users.get(id);
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = this.currentUserId++;
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
+    const [user] = await db
+      .insert(users)
+      .values(insertUser)
+      .returning();
     return user;
   }
 
   async createContactInquiry(insertInquiry: InsertContactInquiry): Promise<ContactInquiry> {
-    const id = this.currentInquiryId++;
-    const inquiry: ContactInquiry = { 
-      ...insertInquiry, 
-      id, 
-      createdAt: new Date() 
-    };
-    this.contactInquiries.set(id, inquiry);
+    const [inquiry] = await db
+      .insert(contactInquiries)
+      .values(insertInquiry)
+      .returning();
     return inquiry;
   }
 
   async createClientRegistration(insertRegistration: InsertClientRegistration): Promise<ClientRegistration> {
-    const id = this.currentRegistrationId++;
-    const registration: ClientRegistration = { 
-      ...insertRegistration, 
-      id, 
-      createdAt: new Date() 
-    };
-    this.clientRegistrations.set(id, registration);
+    const [registration] = await db
+      .insert(clientRegistrations)
+      .values(insertRegistration)
+      .returning();
     return registration;
   }
 
   async getContactInquiries(): Promise<ContactInquiry[]> {
-    return Array.from(this.contactInquiries.values());
+    return await db.select().from(contactInquiries).orderBy(contactInquiries.createdAt);
   }
 
   async getClientRegistrations(): Promise<ClientRegistration[]> {
-    return Array.from(this.clientRegistrations.values());
+    return await db.select().from(clientRegistrations).orderBy(clientRegistrations.createdAt);
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();

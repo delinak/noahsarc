@@ -13,7 +13,7 @@
   --card-foreground: 210 11% 15%;
   --border: 210 20% 82%; /* #CBD5E1 */
   --input: 210 20% 82%;
-  --primary: 217 91% 60%; /* #2563EB - Trust Blue */
+  --primary: 269 91% 60%; /* #7C3AED - Royal Purple */
   --primary-foreground: 210 40% 98%;
   --secondary: 210 11% 98%;
   --secondary-foreground: 210 11% 15%;
@@ -21,12 +21,13 @@
   --accent-foreground: 210 11% 15%;
   --destructive: 0 84% 60%;
   --destructive-foreground: 60 9% 98%;
-  --ring: 217 91% 60%;
+  --ring: 269 91% 60%;
   --radius: 0.5rem;
   
   /* Custom Noah's Arc Care colors */
-  --trust-blue: 217 91% 60%; /* #2563EB */
-  --hope-green: 158 64% 52%; /* #059669 */
+  --royal-purple: 269 91% 60%; /* #7C3AED */
+  --lavender-purple: 269 51% 75%; /* #A78BFA */
+  --deep-purple: 265 85% 47%; /* #6D28D9 */
   --warm-amber: 43 96% 56%; /* #F59E0B */
   --light-gray: 210 11% 98%; /* #F8FAFC */
   --medium-gray: 210 11% 45%; /* #64748B */
@@ -68,20 +69,28 @@
 }
 
 @layer utilities {
-  .trust-blue {
-    color: hsl(var(--trust-blue));
+  .royal-purple {
+    color: hsl(var(--royal-purple));
   }
   
-  .bg-trust-blue {
-    background-color: hsl(var(--trust-blue));
+  .bg-royal-purple {
+    background-color: hsl(var(--royal-purple));
   }
   
-  .hope-green {
-    color: hsl(var(--hope-green));
+  .lavender-purple {
+    color: hsl(var(--lavender-purple));
   }
   
-  .bg-hope-green {
-    background-color: hsl(var(--hope-green));
+  .bg-lavender-purple {
+    background-color: hsl(var(--lavender-purple));
+  }
+
+  .deep-purple {
+    color: hsl(var(--deep-purple));
+  }
+  
+  .bg-deep-purple {
+    background-color: hsl(var(--deep-purple));
   }
   
   .warm-amber {
