@@ -80,8 +80,8 @@ export default function About() {
             </div>
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-                alt="Caring professional providing support in a warm, home-like environment"
+                src="/assets/priscilla-du-preez-aPa843frIzI-unsplash.jpg"
+                alt="Caring hands providing support and connection in professional care setting"
                 className="rounded-2xl shadow-xl w-full h-auto"
               />
               <div className="absolute -bottom-6 -left-6 bg-royal-purple text-white p-6 rounded-xl shadow-lg">
@@ -182,8 +182,8 @@ export default function About() {
             </div>
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-                alt="Professional care team working together in modern facility"
+                src="/assets/pexels-shkrabaanthony-6281432.jpg"
+                alt="Professional care team member working with confidence and dedication"
                 className="rounded-2xl shadow-2xl w-full h-auto"
               />
             </div>

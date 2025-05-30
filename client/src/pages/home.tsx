@@ -46,8 +46,8 @@ export default function Home() {
             </div>
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-                alt="Diverse group of caregivers and individuals with disabilities in supportive community setting"
+                src="/assets/nathan-anderson-GM5Yn5XRVqA-unsplash.jpg"
+                alt="Happy family with individual with developmental disabilities showing love and support"
                 className="rounded-2xl shadow-2xl w-full h-auto"
               />
               <div className="absolute -bottom-6 -left-6 bg-royal-purple text-white p-6 rounded-xl shadow-lg">
@@ -162,8 +162,8 @@ export default function Home() {
             </div>
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-                alt="Professional caregivers working with individuals with disabilities in modern care facility"
+                src="/assets/pexels-cliff-booth-4058053.jpg"
+                alt="Professional caregiver providing compassionate support in a comfortable environment"
                 className="rounded-2xl shadow-xl w-full h-auto"
               />
             </div>

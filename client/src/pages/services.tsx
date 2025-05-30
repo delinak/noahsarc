@@ -149,9 +149,17 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Services Grid */}
+      {/* Featured Service Image */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-16">
+            <img
+              src="/assets/alireza-attari-SBIak0pKUIE-unsplash.jpg"
+              alt="Individual with developmental disabilities engaged in learning activities with supportive technology"
+              className="w-full h-64 object-cover rounded-2xl shadow-lg"
+            />
+          </div>
+          
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => {
               const IconComponent = service.icon;
