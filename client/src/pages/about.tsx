@@ -80,7 +80,7 @@ export default function About() {
             </div>
             <div className="relative">
               <img
-                src="/assets/priscilla-du-preez-aPa843frIzI-unsplash.jpg"
+                src="/priscilla-du-preez-aPa843frIzI-unsplash.jpg"
                 alt="Caring hands providing support and connection in professional care setting"
                 className="rounded-2xl shadow-xl w-full h-auto"
               />
@@ -182,7 +182,7 @@ export default function About() {
             </div>
             <div className="relative">
               <img
-                src="/assets/pexels-shkrabaanthony-6281432.jpg"
+                src="/pexels-shkrabaanthony-6281432.jpg"
                 alt="Professional care team member working with confidence and dedication"
                 className="rounded-2xl shadow-2xl w-full h-auto"
               />

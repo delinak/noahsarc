@@ -46,7 +46,7 @@ export default function Home() {
             </div>
             <div className="relative">
               <img
-                src="/assets/nathan-anderson-GM5Yn5XRVqA-unsplash.jpg"
+                src="/nathan-anderson-GM5Yn5XRVqA-unsplash.jpg"
                 alt="Happy family with individual with developmental disabilities showing love and support"
                 className="rounded-2xl shadow-2xl w-full h-auto"
               />
@@ -162,7 +162,7 @@ export default function Home() {
             </div>
             <div className="relative">
               <img
-                src="/assets/pexels-cliff-booth-4058053.jpg"
+                src="/pexels-cliff-booth-4058053.jpg"
                 alt="Professional caregiver providing compassionate support in a comfortable environment"
                 className="rounded-2xl shadow-xl w-full h-auto"
               />

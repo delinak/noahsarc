@@ -23,7 +23,7 @@ export default function Navigation() {
             <div className="flex-shrink-0">
               <Link href="/" className="flex items-center space-x-3">
                 <img 
-                  src="/assets/Screenshot 2025-04-16 at 2.50.18 PM.png" 
+                  src="/Screenshot 2025-04-16 at 2.50.18 PM.png" 
                   alt="Noah's Arc Care Logo" 
                   className="h-12 w-auto"
                 />

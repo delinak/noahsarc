@@ -133,7 +133,7 @@ export default function Register() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
             <div className="space-y-4">
               <img
-                src="/assets/catt-liu-hQOHDAibf6A-unsplash.jpg"
+                src="/catt-liu-hQOHDAibf6A-unsplash.jpg"
                 alt="Daily living skills support - helping with personal care routines"
                 className="w-full h-64 object-cover rounded-xl shadow-lg"
               />
@@ -143,7 +143,7 @@ export default function Register() {
             
             <div className="space-y-4">
               <img
-                src="/assets/pexels-cliff-booth-4058053.jpg"
+                src="/pexels-cliff-booth-4058053.jpg"
                 alt="Individual with developmental disabilities sharing a meal with caregiver"
                 className="w-full h-64 object-cover rounded-xl shadow-lg"
               />
@@ -153,7 +153,7 @@ export default function Register() {
             
             <div className="space-y-4">
               <img
-                src="/assets/alireza-attari-SBIak0pKUIE-unsplash.jpg"
+                src="/alireza-attari-SBIak0pKUIE-unsplash.jpg"
                 alt="Technology-assisted learning and skill development"
                 className="w-full h-64 object-cover rounded-xl shadow-lg"
               />
