@@ -120,8 +120,52 @@ export default function Register() {
         </div>
       </section>
 
-      {/* Registration Form Section */}
+      {/* Care Services Gallery */}
       <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-dark-gray mb-4">See Our Care in Action</h2>
+            <p className="text-xl text-medium-gray">
+              Real moments of support, growth, and independence
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+            <div className="space-y-4">
+              <img
+                src="/assets/catt-liu-hQOHDAibf6A-unsplash.jpg"
+                alt="Daily living skills support - helping with personal care routines"
+                className="w-full h-64 object-cover rounded-xl shadow-lg"
+              />
+              <h3 className="font-semibold text-dark-gray">Daily Living Support</h3>
+              <p className="text-sm text-medium-gray">Assisting with personal care and daily routines</p>
+            </div>
+            
+            <div className="space-y-4">
+              <img
+                src="/assets/pexels-cliff-booth-4058053.jpg"
+                alt="Individual with developmental disabilities sharing a meal with caregiver"
+                className="w-full h-64 object-cover rounded-xl shadow-lg"
+              />
+              <h3 className="font-semibold text-dark-gray">Mealtime Support</h3>
+              <p className="text-sm text-medium-gray">Nutrition assistance and social interaction during meals</p>
+            </div>
+            
+            <div className="space-y-4">
+              <img
+                src="/assets/alireza-attari-SBIak0pKUIE-unsplash.jpg"
+                alt="Technology-assisted learning and skill development"
+                className="w-full h-64 object-cover rounded-xl shadow-lg"
+              />
+              <h3 className="font-semibold text-dark-gray">Skills Development</h3>
+              <p className="text-sm text-medium-gray">Technology-assisted learning and independence training</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Registration Form Section */}
+      <section className="py-20 bg-purple-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-dark-gray mb-4">Client Registration Form</h2>
