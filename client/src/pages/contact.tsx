@@ -2,6 +2,7 @@ import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import ContactForm from "@/components/contact-form";
 import { Phone, Mail, MapPin, Clock, MessageSquare, Heart, Users } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 export default function Contact() {
   const contactMethods = [
@@ -247,42 +248,50 @@ export default function Contact() {
             </p>
           </div>
           
-          <div className="space-y-6">
-            <div className="bg-white p-6 rounded-xl shadow-sm">
-              <h3 className="text-xl font-semibold text-dark-gray mb-3">How quickly can services begin?</h3>
-              <p className="text-medium-gray leading-relaxed">
+          <Accordion type="single" collapsible className="space-y-4">
+            <AccordionItem value="item-1" className="bg-white rounded-xl shadow-sm border-0">
+              <AccordionTrigger className="px-6 py-4 text-left text-lg font-semibold text-dark-gray hover:no-underline">
+                How quickly can services begin?
+              </AccordionTrigger>
+              <AccordionContent className="px-6 pb-4 text-medium-gray leading-relaxed">
                 Service timelines vary based on individual needs and availability. We work to begin services 
                 as quickly as possible while ensuring proper planning and preparation. During your initial 
                 consultation, we'll provide a realistic timeline for your specific situation.
-              </p>
-            </div>
+              </AccordionContent>
+            </AccordionItem>
             
-            <div className="bg-white p-6 rounded-xl shadow-sm">
-              <h3 className="text-xl font-semibold text-dark-gray mb-3">What areas do you serve?</h3>
-              <p className="text-medium-gray leading-relaxed">
-                We proudly serve communities throughout Kansas, with our primary service area centered around 
-                Wichita. Contact us to confirm service availability in your specific location.
-              </p>
-            </div>
+            <AccordionItem value="item-2" className="bg-white rounded-xl shadow-sm border-0">
+              <AccordionTrigger className="px-6 py-4 text-left text-lg font-semibold text-dark-gray hover:no-underline">
+                What areas do you serve?
+              </AccordionTrigger>
+              <AccordionContent className="px-6 pb-4 text-medium-gray leading-relaxed">
+                We proudly serve communities throughout Tennessee, with our primary service area centered around 
+                Nashville. Contact us to confirm service availability in your specific location.
+              </AccordionContent>
+            </AccordionItem>
             
-            <div className="bg-white p-6 rounded-xl shadow-sm">
-              <h3 className="text-xl font-semibold text-dark-gray mb-3">Do you accept insurance or Medicaid?</h3>
-              <p className="text-medium-gray leading-relaxed">
+            <AccordionItem value="item-3" className="bg-white rounded-xl shadow-sm border-0">
+              <AccordionTrigger className="px-6 py-4 text-left text-lg font-semibold text-dark-gray hover:no-underline">
+                Do you accept insurance or Medicaid?
+              </AccordionTrigger>
+              <AccordionContent className="px-6 pb-4 text-medium-gray leading-relaxed">
                 Yes, we work with various insurance providers and participate in Medicaid waiver programs, 
                 including the Katie Beckett program. We'll help you understand your coverage options and 
                 work with you to maximize available benefits.
-              </p>
-            </div>
+              </AccordionContent>
+            </AccordionItem>
             
-            <div className="bg-white p-6 rounded-xl shadow-sm">
-              <h3 className="text-xl font-semibold text-dark-gray mb-3">What makes Noah's Arc Care different?</h3>
-              <p className="text-medium-gray leading-relaxed">
+            <AccordionItem value="item-4" className="bg-white rounded-xl shadow-sm border-0">
+              <AccordionTrigger className="px-6 py-4 text-left text-lg font-semibold text-dark-gray hover:no-underline">
+                What makes Noah's Arc Care different?
+              </AccordionTrigger>
+              <AccordionContent className="px-6 pb-4 text-medium-gray leading-relaxed">
                 Our 20+ years of experience, person-centered approach, and genuine commitment to each individual's 
                 success sets us apart. We focus on building long-term relationships and empowering independence 
                 rather than just providing services.
-              </p>
-            </div>
-          </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
       </section>
 
