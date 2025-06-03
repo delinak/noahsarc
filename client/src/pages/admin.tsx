@@ -159,12 +159,12 @@ export default function Admin() {
               
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Client Registrations</CardTitle>
+                  <CardTitle className="text-sm font-medium">Job Applications</CardTitle>
                   <Users className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{clientRegistrations.length}</div>
-                  <p className="text-xs text-muted-foreground">New client registrations</p>
+                  <div className="text-2xl font-bold">{jobApplications.length}</div>
+                  <p className="text-xs text-muted-foreground">Career applications received</p>
                 </CardContent>
               </Card>
               
@@ -174,7 +174,7 @@ export default function Admin() {
                   <Calendar className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{contactInquiries.length + clientRegistrations.length}</div>
+                  <div className="text-2xl font-bold">{contactInquiries.length + jobApplications.length}</div>
                   <p className="text-xs text-muted-foreground">All form submissions</p>
                 </CardContent>
               </Card>
@@ -211,27 +211,27 @@ export default function Admin() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Recent Registrations</CardTitle>
-                  <CardDescription>Latest 5 client registrations</CardDescription>
+                  <CardTitle>Recent Job Applications</CardTitle>
+                  <CardDescription>Latest 5 career applications</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {clientRegistrations.slice(0, 5).map((registration) => (
-                    <div key={registration.id} className="space-y-2">
+                  {jobApplications.slice(0, 5).map((application) => (
+                    <div key={application.id} className="space-y-2">
                       <div className="flex items-center justify-between">
                         <p className="text-sm font-medium">
-                          {registration.clientFirstName} {registration.clientLastName}
+                          {application.firstName} {application.lastName}
                         </p>
                         <p className="text-xs text-muted-foreground">
-                          {formatDate(registration.createdAt!)}
+                          {formatDate(application.createdAt!)}
                         </p>
                       </div>
                       <p className="text-xs text-muted-foreground">
-                        Contact: {registration.contactFirstName} {registration.contactLastName} ({registration.relationship})
+                        Position: {application.position} | {application.email}
                       </p>
                     </div>
                   ))}
-                  {clientRegistrations.length === 0 && (
-                    <p className="text-sm text-muted-foreground text-center py-4">No registrations yet</p>
+                  {jobApplications.length === 0 && (
+                    <p className="text-sm text-muted-foreground text-center py-4">No applications yet</p>
                   )}
                 </CardContent>
               </Card>
@@ -290,80 +290,67 @@ export default function Admin() {
             </Card>
           </TabsContent>
 
-          <TabsContent value="registrations" className="space-y-6">
+          <TabsContent value="applications" className="space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle>Client Registrations</CardTitle>
-                <CardDescription>All client registration submissions</CardDescription>
+                <CardTitle>Job Applications</CardTitle>
+                <CardDescription>All career application submissions</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                {clientRegistrations.map((registration, index) => (
-                  <div key={registration.id}>
+                {jobApplications.map((application, index) => (
+                  <div key={application.id}>
                     {index > 0 && <Separator className="my-6" />}
                     <div className="space-y-4">
                       <div className="grid md:grid-cols-2 gap-6">
                         <div className="space-y-3">
-                          <h3 className="text-lg font-semibold">Client Information</h3>
+                          <h3 className="text-lg font-semibold">Applicant Information</h3>
                           <div className="space-y-2 text-sm">
-                            <p><strong>Name:</strong> {registration.clientFirstName} {registration.clientLastName}</p>
-                            <p><strong>Date of Birth:</strong> {registration.clientDob}</p>
-                            {registration.clientGender && <p><strong>Gender:</strong> {registration.clientGender}</p>}
-                            {registration.insuranceId && <p><strong>Insurance ID:</strong> {registration.insuranceId}</p>}
+                            <p><strong>Name:</strong> {application.firstName} {application.lastName}</p>
+                            <div className="flex items-center space-x-1">
+                              <Mail className="h-3 w-3" />
+                              <span>{application.email}</span>
+                            </div>
+                            <div className="flex items-center space-x-1">
+                              <Phone className="h-3 w-3" />
+                              <span>{application.phone}</span>
+                            </div>
                           </div>
                         </div>
                         
                         <div className="space-y-3">
-                          <h3 className="text-lg font-semibold">Contact Person</h3>
+                          <h3 className="text-lg font-semibold">Position Details</h3>
                           <div className="space-y-2 text-sm">
-                            <p><strong>Name:</strong> {registration.contactFirstName} {registration.contactLastName}</p>
-                            <p><strong>Relationship:</strong> {registration.relationship}</p>
-                            <div className="flex items-center space-x-1">
-                              <Mail className="h-3 w-3" />
-                              <span>{registration.contactEmail}</span>
-                            </div>
-                            <div className="flex items-center space-x-1">
-                              <Phone className="h-3 w-3" />
-                              <span>{registration.contactPhone}</span>
-                            </div>
+                            <p><strong>Position:</strong> {application.position}</p>
+                            {application.availability && <p><strong>Availability:</strong> {application.availability}</p>}
+                            {application.resumeFileName && <p><strong>Resume:</strong> {application.resumeFileName}</p>}
                           </div>
                         </div>
                       </div>
 
-                      {registration.services && registration.services.length > 0 && (
-                        <div className="space-y-3">
-                          <h4 className="font-semibold">Services Requested</h4>
-                          <div className="flex flex-wrap gap-2">
-                            {registration.services.map((service, i) => (
-                              <Badge key={i} variant="outline">{service}</Badge>
-                            ))}
-                          </div>
+                      {application.experience && (
+                        <div className="space-y-2">
+                          <h4 className="font-semibold">Experience</h4>
+                          <p className="text-sm bg-gray-50 p-3 rounded">{application.experience}</p>
                         </div>
                       )}
 
-                      {registration.specialNeeds && (
+                      {application.coverLetter && (
                         <div className="space-y-2">
-                          <h4 className="font-semibold">Special Needs</h4>
-                          <p className="text-sm bg-gray-50 p-3 rounded">{registration.specialNeeds}</p>
-                        </div>
-                      )}
-
-                      {registration.goals && (
-                        <div className="space-y-2">
-                          <h4 className="font-semibold">Goals</h4>
-                          <p className="text-sm bg-gray-50 p-3 rounded">{registration.goals}</p>
+                          <h4 className="font-semibold">Cover Letter</h4>
+                          <p className="text-sm bg-gray-50 p-3 rounded">{application.coverLetter}</p>
                         </div>
                       )}
 
                       <div className="text-xs text-muted-foreground">
-                        Submitted: {formatDate(registration.createdAt!)}
+                        Submitted: {formatDate(application.createdAt!)}
                       </div>
                     </div>
                   </div>
                 ))}
-                {clientRegistrations.length === 0 && (
+                {jobApplications.length === 0 && (
                   <div className="text-center py-12">
                     <Users className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                    <p className="text-muted-foreground">No client registrations yet</p>
+                    <p className="text-muted-foreground">No job applications yet</p>
                   </div>
                 )}
               </CardContent>

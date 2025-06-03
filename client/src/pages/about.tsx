@@ -27,7 +27,7 @@ export default function About() {
   ];
 
   const achievements = [
-    "Licensed and certified care provider in Kansas",
+    "Licensed and certified care provider in Tennessee",
     "Over 20 years of combined experience",
     "Specialized training in developmental disabilities",
     "Strong community partnerships and referral network",
