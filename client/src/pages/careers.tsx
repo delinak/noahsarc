@@ -237,6 +237,13 @@ export default function Careers() {
         </div>
       </section>
 
+      {/* Job Application Form */}
+      <section className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <JobApplicationForm />
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
