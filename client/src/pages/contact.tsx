@@ -1,7 +1,7 @@
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import ContactForm from "@/components/contact-form";
-import { Phone, Mail, MapPin, Clock, MessageSquare, Heart } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, MessageSquare, Heart, Users } from "lucide-react";
 
 export default function Contact() {
   const contactMethods = [

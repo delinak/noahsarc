@@ -1,28 +1,78 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ArrowLeft, Users, MessageSquare, Calendar, Phone, Mail, MapPin } from "lucide-react";
+import { ArrowLeft, Users, MessageSquare, Calendar, Phone, Mail, MapPin, LogOut } from "lucide-react";
 import { Link } from "wouter";
 import { getQueryFn } from "@/lib/queryClient";
 import type { ContactInquiry, ClientRegistration } from "@shared/schema";
 
 export default function Admin() {
   const [selectedTab, setSelectedTab] = useState("overview");
+  const [, setLocation] = useLocation();
 
-  // Fetch contact inquiries
+  // Check authentication
+  useEffect(() => {
+    const token = localStorage.getItem("adminToken");
+    if (!token) {
+      setLocation("/admin-login");
+      return;
+    }
+  }, [setLocation]);
+
+  const logout = () => {
+    localStorage.removeItem("adminToken");
+    setLocation("/admin-login");
+  };
+
+  // Fetch contact inquiries with auth token
   const { data: contactData, isLoading: contactLoading } = useQuery<{ success: boolean; inquiries: ContactInquiry[] }>({
     queryKey: ["/api/contact"],
-    queryFn: getQueryFn({ on401: "throw" }),
+    queryFn: async () => {
+      const token = localStorage.getItem("adminToken");
+      const response = await fetch("/api/contact", {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+      
+      if (!response.ok) {
+        if (response.status === 401) {
+          localStorage.removeItem("adminToken");
+          setLocation("/admin-login");
+        }
+        throw new Error("Failed to fetch");
+      }
+      
+      return response.json();
+    },
   });
 
-  // Fetch client registrations
+  // Fetch client registrations with auth token
   const { data: registrationData, isLoading: registrationLoading } = useQuery<{ success: boolean; registrations: ClientRegistration[] }>({
     queryKey: ["/api/registrations"],
-    queryFn: getQueryFn({ on401: "throw" }),
+    queryFn: async () => {
+      const token = localStorage.getItem("adminToken");
+      const response = await fetch("/api/registrations", {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+      
+      if (!response.ok) {
+        if (response.status === 401) {
+          localStorage.removeItem("adminToken");
+          setLocation("/admin-login");
+        }
+        throw new Error("Failed to fetch");
+      }
+      
+      return response.json();
+    },
   });
 
   const contactInquiries: ContactInquiry[] = contactData?.inquiries || [];
@@ -65,12 +115,18 @@ export default function Admin() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">
-              <Link href="/">
-                <Button variant="ghost" size="sm">
-                  <ArrowLeft className="h-4 w-4 mr-2" />
-                  Back to Website
+              <div className="flex items-center space-x-4">
+                <Link href="/">
+                  <Button variant="ghost" size="sm">
+                    <ArrowLeft className="h-4 w-4 mr-2" />
+                    Back to Website
+                  </Button>
+                </Link>
+                <Button variant="outline" size="sm" onClick={logout}>
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Logout
                 </Button>
-              </Link>
+              </div>
               <div>
                 <h1 className="text-2xl font-bold text-dark-gray">Admin Dashboard</h1>
                 <p className="text-sm text-medium-gray">Noah's Arc Care - Form Submissions</p>

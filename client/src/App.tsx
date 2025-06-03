@@ -9,6 +9,7 @@ import Services from "@/pages/services";
 import Contact from "@/pages/contact";
 import Register from "@/pages/register";
 import Admin from "@/pages/admin";
+import AdminLogin from "@/pages/admin-login";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -20,6 +21,7 @@ function Router() {
       <Route path="/contact" component={Contact} />
       <Route path="/register" component={Register} />
       <Route path="/admin" component={Admin} />
+      <Route path="/admin-login" component={AdminLogin} />
       <Route component={NotFound} />
     </Switch>
   );

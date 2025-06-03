@@ -49,8 +49,43 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get all contact inquiries (for admin purposes)
-  app.get("/api/contact", async (req, res) => {
+  // Admin authentication
+  app.post("/api/admin/login", async (req, res) => {
+    const { password } = req.body;
+    const adminPassword = process.env.ADMIN_PASSWORD || "noahsarc2024";
+    
+    if (password === adminPassword) {
+      const token = Buffer.from(`admin:${Date.now()}`).toString('base64');
+      res.json({ success: true, token });
+    } else {
+      res.status(401).json({ success: false, message: "Invalid password" });
+    }
+  });
+
+  // Admin middleware
+  const adminAuth = async (req: any, res: any, next: any) => {
+    const authHeader = req.headers.authorization;
+    
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res.status(401).json({ success: false, message: "Access denied" });
+    }
+    
+    const token = authHeader.substring(7);
+    
+    try {
+      const decoded = Buffer.from(token, 'base64').toString();
+      if (decoded.startsWith('admin:')) {
+        next();
+      } else {
+        res.status(401).json({ success: false, message: "Access denied" });
+      }
+    } catch (error) {
+      res.status(401).json({ success: false, message: "Access denied" });
+    }
+  };
+
+  // Protected admin routes
+  app.get("/api/contact", adminAuth, async (req, res) => {
     try {
       const inquiries = await storage.getContactInquiries();
       res.json({ success: true, inquiries });
@@ -62,8 +97,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get all client registrations (for admin purposes)
-  app.get("/api/registrations", async (req, res) => {
+  app.get("/api/registrations", adminAuth, async (req, res) => {
     try {
       const registrations = await storage.getClientRegistrations();
       res.json({ success: true, registrations });
