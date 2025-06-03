@@ -47,9 +47,9 @@ export default function Navigation() {
                   </button>
                 </Link>
               ))}
-              <Link href="/register">
+              <Link href="/contact">
                 <Button className="bg-royal-purple text-white hover:bg-purple-700">
-                  Get Started
+                  Contact Us
                 </Button>
               </Link>
             </div>
@@ -79,12 +79,12 @@ export default function Navigation() {
                       </button>
                     </Link>
                   ))}
-                  <Link href="/register">
+                  <Link href="/contact">
                     <Button
                       onClick={() => setIsOpen(false)}
                       className="bg-royal-purple text-white hover:bg-purple-700 mt-4 w-full"
                     >
-                      Get Started
+                      Contact Us
                     </Button>
                   </Link>
                 </div>

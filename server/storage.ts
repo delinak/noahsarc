@@ -1,4 +1,4 @@
-import { users, contactInquiries, clientRegistrations, type User, type InsertUser, type ContactInquiry, type InsertContactInquiry, type ClientRegistration, type InsertClientRegistration } from "@shared/schema";
+import { users, contactInquiries, jobApplications, type User, type InsertUser, type ContactInquiry, type InsertContactInquiry, type JobApplication, type InsertJobApplication } from "@shared/schema";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
 
@@ -7,9 +7,9 @@ export interface IStorage {
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
   createContactInquiry(inquiry: InsertContactInquiry): Promise<ContactInquiry>;
-  createClientRegistration(registration: InsertClientRegistration): Promise<ClientRegistration>;
+  createJobApplication(application: InsertJobApplication): Promise<JobApplication>;
   getContactInquiries(): Promise<ContactInquiry[]>;
-  getClientRegistrations(): Promise<ClientRegistration[]>;
+  getJobApplications(): Promise<JobApplication[]>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -39,20 +39,20 @@ export class DatabaseStorage implements IStorage {
     return inquiry;
   }
 
-  async createClientRegistration(insertRegistration: InsertClientRegistration): Promise<ClientRegistration> {
-    const [registration] = await db
-      .insert(clientRegistrations)
-      .values(insertRegistration)
+  async createJobApplication(insertApplication: InsertJobApplication): Promise<JobApplication> {
+    const [application] = await db
+      .insert(jobApplications)
+      .values(insertApplication)
       .returning();
-    return registration;
+    return application;
   }
 
   async getContactInquiries(): Promise<ContactInquiry[]> {
     return await db.select().from(contactInquiries).orderBy(contactInquiries.createdAt);
   }
 
-  async getClientRegistrations(): Promise<ClientRegistration[]> {
-    return await db.select().from(clientRegistrations).orderBy(clientRegistrations.createdAt);
+  async getJobApplications(): Promise<JobApplication[]> {
+    return await db.select().from(jobApplications).orderBy(jobApplications.createdAt);
   }
 }
 

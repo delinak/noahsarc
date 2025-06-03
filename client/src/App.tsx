@@ -8,7 +8,7 @@ import About from "@/pages/about";
 import Services from "@/pages/services";
 import Careers from "@/pages/careers";
 import Contact from "@/pages/contact";
-import Register from "@/pages/register";
+
 import Admin from "@/pages/admin";
 import AdminLogin from "@/pages/admin-login";
 import NotFound from "@/pages/not-found";
@@ -21,7 +21,6 @@ function Router() {
       <Route path="/services" component={Services} />
       <Route path="/careers" component={Careers} />
       <Route path="/contact" component={Contact} />
-      <Route path="/register" component={Register} />
       <Route path="/admin" component={Admin} />
       <Route path="/admin-login" component={AdminLogin} />
       <Route component={NotFound} />
