@@ -155,7 +155,7 @@ export default function Services() {
             <img
               src="/alireza-attari-SBIak0pKUIE-unsplash.jpg"
               alt="Individual with developmental disabilities engaged in learning activities with supportive technology"
-              className="w-full h-64 object-cover rounded-2xl shadow-lg"
+              className="w-full h-48 object-cover rounded-2xl shadow-lg"
             />
           </div>
           
@@ -256,11 +256,7 @@ export default function Services() {
                 Contact Us Today
               </Button>
             </Link>
-            <Link href="/register">
-              <Button size="lg" className="bg-white text-purple-600 hover:bg-purple-50 px-8 py-4">
-                Register for Services
-              </Button>
-            </Link>
+
           </div>
         </div>
       </section>
