@@ -155,7 +155,7 @@ export default function Services() {
             <img
               src="/alireza-attari-SBIak0pKUIE-unsplash.jpg"
               alt="Individual with developmental disabilities engaged in learning activities with supportive technology"
-              className="w-full h-48 object-cover rounded-2xl shadow-lg"
+              className="w-4/5 h-auto rounded-2xl shadow-lg mx-auto"
             />
           </div>
           

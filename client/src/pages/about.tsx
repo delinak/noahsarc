@@ -82,7 +82,7 @@ export default function About() {
               <img
                 src="/priscilla-du-preez-aPa843frIzI-unsplash.jpg"
                 alt="Caring hands providing support and connection in professional care setting"
-                className="rounded-2xl shadow-xl w-full h-48 object-cover"
+                className="rounded-2xl shadow-xl w-4/5 h-auto"
               />
               <div className="absolute -bottom-6 -left-6 bg-royal-purple text-white p-6 rounded-xl shadow-lg">
                 <div className="text-2xl font-bold">20+</div>

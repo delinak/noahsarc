@@ -48,7 +48,7 @@ export default function Home() {
               <img
                 src="/nathan-anderson-GM5Yn5XRVqA-unsplash.jpg"
                 alt="Happy family with individual with developmental disabilities showing love and support"
-                className="rounded-2xl shadow-2xl w-full h-64 object-cover"
+                className="rounded-2xl shadow-2xl w-4/5 h-auto"
               />
               <div className="absolute -bottom-6 -left-6 bg-royal-purple text-white p-6 rounded-xl shadow-lg">
                 <div className="text-2xl font-bold">20+</div>
@@ -161,7 +161,7 @@ export default function Home() {
               <img
                 src="/pexels-cliff-booth-4058053.jpg"
                 alt="Professional caregiver providing compassionate support in a comfortable environment"
-                className="rounded-2xl shadow-xl w-full h-48 object-cover"
+                className="rounded-2xl shadow-xl w-4/5 h-auto"
               />
             </div>
           </div>
@@ -205,7 +205,7 @@ export default function Home() {
               <img
                 src="/pexels-shkrabaanthony-6281432.jpg"
                 alt="Professional care team member working with confidence and dedication"
-                className="rounded-2xl shadow-2xl w-full h-48 object-cover"
+                className="rounded-2xl shadow-2xl w-4/5 h-auto"
               />
             </div>
           </div>
