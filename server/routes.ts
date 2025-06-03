@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertContactInquirySchema, insertClientRegistrationSchema } from "@shared/schema";
+import { insertContactInquirySchema, insertJobApplicationSchema } from "@shared/schema";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -27,12 +27,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Client registration endpoint
-  app.post("/api/register", async (req, res) => {
+  // Job application endpoint
+  app.post("/api/jobs/apply", async (req, res) => {
     try {
-      const validatedData = insertClientRegistrationSchema.parse(req.body);
-      const registration = await storage.createClientRegistration(validatedData);
-      res.json({ success: true, registration });
+      const validatedData = insertJobApplicationSchema.parse(req.body);
+      const application = await storage.createJobApplication(validatedData);
+      res.json({ success: true, application });
     } catch (error) {
       if (error instanceof z.ZodError) {
         res.status(400).json({ 
@@ -43,7 +43,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       } else {
         res.status(500).json({ 
           success: false, 
-          message: "Failed to submit registration" 
+          message: "Failed to submit application" 
         });
       }
     }
@@ -97,14 +97,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get("/api/registrations", adminAuth, async (req, res) => {
+  app.get("/api/job-applications", adminAuth, async (req, res) => {
     try {
-      const registrations = await storage.getClientRegistrations();
-      res.json({ success: true, registrations });
+      const applications = await storage.getJobApplications();
+      res.json({ success: true, applications });
     } catch (error) {
       res.status(500).json({ 
         success: false, 
-        message: "Failed to fetch registrations" 
+        message: "Failed to fetch job applications" 
       });
     }
   });

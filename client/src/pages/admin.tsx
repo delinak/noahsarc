@@ -9,7 +9,7 @@ import { Separator } from "@/components/ui/separator";
 import { ArrowLeft, Users, MessageSquare, Calendar, Phone, Mail, MapPin, LogOut } from "lucide-react";
 import { Link } from "wouter";
 import { getQueryFn } from "@/lib/queryClient";
-import type { ContactInquiry, ClientRegistration } from "@shared/schema";
+import type { ContactInquiry, JobApplication } from "@shared/schema";
 
 export default function Admin() {
   const [selectedTab, setSelectedTab] = useState("overview");
@@ -52,12 +52,12 @@ export default function Admin() {
     },
   });
 
-  // Fetch client registrations with auth token
-  const { data: registrationData, isLoading: registrationLoading } = useQuery<{ success: boolean; registrations: ClientRegistration[] }>({
-    queryKey: ["/api/registrations"],
+  // Fetch job applications with auth token
+  const { data: jobApplicationData, isLoading: jobApplicationLoading } = useQuery<{ success: boolean; applications: JobApplication[] }>({
+    queryKey: ["/api/job-applications"],
     queryFn: async () => {
       const token = localStorage.getItem("adminToken");
-      const response = await fetch("/api/registrations", {
+      const response = await fetch("/api/job-applications", {
         headers: {
           "Authorization": `Bearer ${token}`,
         },
@@ -76,7 +76,7 @@ export default function Admin() {
   });
 
   const contactInquiries: ContactInquiry[] = contactData?.inquiries || [];
-  const clientRegistrations: ClientRegistration[] = registrationData?.registrations || [];
+  const jobApplications: JobApplication[] = jobApplicationData?.applications || [];
 
   const formatDate = (date: Date | string) => {
     return new Date(date).toLocaleDateString('en-US', {
@@ -98,7 +98,7 @@ export default function Admin() {
     return colors[type as keyof typeof colors] || "bg-gray-100 text-gray-800";
   };
 
-  if (contactLoading || registrationLoading) {
+  if (contactLoading || jobApplicationLoading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
@@ -141,7 +141,7 @@ export default function Admin() {
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="inquiries">Contact Inquiries ({contactInquiries.length})</TabsTrigger>
-            <TabsTrigger value="registrations">Client Registrations ({clientRegistrations.length})</TabsTrigger>
+            <TabsTrigger value="applications">Job Applications ({jobApplications.length})</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">

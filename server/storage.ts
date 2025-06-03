@@ -52,7 +52,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getJobApplications(): Promise<JobApplication[]> {
-    return await db.select().from(jobApplications).orderBy(jobApplications.createdAt);
+    return await db.select().from(jobApplications).orderBy(jobApplications.id);
   }
 }
 
