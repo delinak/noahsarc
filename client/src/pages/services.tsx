@@ -225,7 +225,7 @@ export default function Services() {
               </div>
               <h3 className="text-xl font-semibold text-dark-gray mb-3">Licensed & Certified</h3>
               <p className="text-medium-gray">
-                Fully licensed and certified to provide quality care services throughout Kansas.
+                Fully licensed and certified to provide quality care services throughout Tennessee.
               </p>
             </div>
             <div className="text-center">

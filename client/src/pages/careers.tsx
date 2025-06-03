@@ -1,5 +1,6 @@
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
+import JobApplicationForm from "@/components/job-application-form";
 import { Phone, Mail, Users, Heart, Shield, Clock, Award, MapPin } from "lucide-react";
 
 export default function Careers() {

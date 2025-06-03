@@ -33,7 +33,7 @@ export default function Contact() {
     { day: "Monday - Friday", hours: "8:00 AM - 6:00 PM" },
     { day: "Saturday", hours: "9:00 AM - 2:00 PM" },
     { day: "Sunday", hours: "Emergency calls only" },
-    { day: "24/7 Emergency", hours: "Always available for urgent needs" }
+    { day: "Emergency Contact", hours: "Available for urgent needs during business hours" }
   ];
 
   return (

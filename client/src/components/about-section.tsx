@@ -28,7 +28,7 @@ export default function AboutSection() {
                 <div className="text-sm text-medium-gray">Lives Touched</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-warm-amber">24/7</div>
+                <div className="text-3xl font-bold text-warm-amber">Quality</div>
                 <div className="text-sm text-medium-gray">Dedicated Support</div>
               </div>
             </div>
