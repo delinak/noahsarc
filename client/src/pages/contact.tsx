@@ -40,42 +40,55 @@ export default function Contact() {
       <Navigation />
       
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-purple-50 to-purple-100 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative bg-gradient-to-br from-purple-50 to-purple-100 py-12">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl lg:text-5xl font-bold text-dark-gray mb-6">
+            <h1 className="text-3xl lg:text-4xl font-bold text-dark-gray mb-4">
               Get In <span className="royal-purple">Touch</span>
             </h1>
-            <p className="text-xl text-medium-gray max-w-3xl mx-auto leading-relaxed">
-              We're here to answer your questions, provide information about our services, 
-              and help you take the next step toward quality care and support.
+            <p className="text-lg text-medium-gray max-w-2xl mx-auto">
+              We're here to answer your questions and help you take the next step toward quality care.
             </p>
           </div>
         </div>
       </section>
 
+      {/* Contact Form Section - Moved to top */}
+      <section className="py-12 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <MessageSquare className="h-12 w-12 royal-purple mx-auto mb-4" />
+            <h2 className="text-2xl lg:text-3xl font-bold text-dark-gray mb-3">Send Us a Message</h2>
+            <p className="text-lg text-medium-gray">
+              Fill out the form below and we'll get back to you quickly with the information you need.
+            </p>
+          </div>
+          <ContactForm />
+        </div>
+      </section>
+
       {/* Contact Methods */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-dark-gray mb-4">How to Reach Us</h2>
-            <p className="text-xl text-medium-gray max-w-3xl mx-auto">
-              Choose the method that works best for you. We're committed to responding promptly and thoroughly.
+      <section className="py-12 bg-purple-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl lg:text-3xl font-bold text-dark-gray mb-3">Other Ways to Reach Us</h2>
+            <p className="text-lg text-medium-gray">
+              Choose the method that works best for you.
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <div className="grid md:grid-cols-3 gap-6">
             {contactMethods.map((method, index) => {
               const IconComponent = method.icon;
               return (
-                <div key={index} className="bg-purple-50 p-8 rounded-2xl text-center hover:shadow-lg transition-shadow">
-                  <div className="w-20 h-20 bg-royal-purple rounded-full flex items-center justify-center mx-auto mb-6">
-                    <IconComponent className="h-10 w-10 text-white" />
+                <div key={index} className="bg-white p-6 rounded-xl shadow-sm text-center hover:shadow-md transition-shadow">
+                  <div className="w-14 h-14 bg-royal-purple rounded-full flex items-center justify-center mx-auto mb-4">
+                    <IconComponent className="h-7 w-7 text-white" />
                   </div>
-                  <h3 className="text-xl font-semibold text-dark-gray mb-3">{method.title}</h3>
-                  <p className="text-2xl font-bold royal-purple mb-3">{method.detail}</p>
-                  <p className="text-medium-gray mb-4 leading-relaxed">{method.description}</p>
-                  <p className="text-sm text-medium-gray font-medium">{method.available}</p>
+                  <h3 className="text-lg font-semibold text-dark-gray mb-2">{method.title}</h3>
+                  <p className="text-xl font-bold royal-purple mb-2">{method.detail}</p>
+                  <p className="text-medium-gray mb-3 text-sm leading-relaxed">{method.description}</p>
+                  <p className="text-xs text-medium-gray font-medium">{method.available}</p>
                 </div>
               );
             })}
@@ -84,9 +97,9 @@ export default function Contact() {
       </section>
 
       {/* Office Hours & Location Info */}
-      <section className="py-20 bg-purple-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12">
+      <section className="py-12 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-8">
             <div className="bg-white p-8 rounded-2xl shadow-lg">
               <div className="flex items-center mb-6">
                 <Clock className="h-8 w-8 royal-purple mr-3" />
@@ -145,45 +158,41 @@ export default function Contact() {
       </section>
 
       {/* Work with Us Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <Users className="h-16 w-16 royal-purple mx-auto mb-6" />
-            <h2 className="text-3xl lg:text-4xl font-bold text-dark-gray mb-4">Work with Us</h2>
-            <p className="text-xl text-medium-gray max-w-3xl mx-auto">
-              Join our compassionate team of caregivers dedicated to empowering individuals with intellectual and developmental disabilities.
+      <section className="py-12 bg-purple-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <Users className="h-12 w-12 royal-purple mx-auto mb-4" />
+            <h2 className="text-2xl lg:text-3xl font-bold text-dark-gray mb-3">Work with Us</h2>
+            <p className="text-lg text-medium-gray max-w-2xl mx-auto">
+              Join our compassionate team of caregivers in Nashville, TN.
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h3 className="text-2xl font-semibold text-dark-gray">Why Work at Noah's Arc Care?</h3>
-              <div className="space-y-4">
+          <div className="grid md:grid-cols-2 gap-8 items-start">
+            <div className="space-y-5">
+              <h3 className="text-xl font-semibold text-dark-gray">Why Work at Noah's Arc Care?</h3>
+              <div className="space-y-3">
                 <div className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-royal-purple rounded-full mt-2"></div>
-                  <p className="text-medium-gray">Competitive compensation and benefits package</p>
+                  <p className="text-medium-gray text-sm">Competitive compensation and benefits package</p>
                 </div>
                 <div className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-royal-purple rounded-full mt-2"></div>
-                  <p className="text-medium-gray">Comprehensive training and professional development</p>
+                  <p className="text-medium-gray text-sm">Comprehensive training and professional development</p>
                 </div>
                 <div className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-royal-purple rounded-full mt-2"></div>
-                  <p className="text-medium-gray">Flexible scheduling options</p>
+                  <p className="text-medium-gray text-sm">Flexible scheduling options</p>
                 </div>
                 <div className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-royal-purple rounded-full mt-2"></div>
-                  <p className="text-medium-gray">Meaningful work that makes a real difference</p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-royal-purple rounded-full mt-2"></div>
-                  <p className="text-medium-gray">Supportive team environment in Nashville, TN</p>
+                  <p className="text-medium-gray text-sm">Meaningful work that makes a real difference</p>
                 </div>
               </div>
               
-              <div className="bg-purple-50 p-6 rounded-xl">
-                <h4 className="font-semibold text-dark-gray mb-3">We're Looking For:</h4>
-                <div className="space-y-2 text-sm text-medium-gray">
+              <div className="bg-white p-5 rounded-xl shadow-sm">
+                <h4 className="font-semibold text-dark-gray mb-3">Open Positions:</h4>
+                <div className="space-y-1 text-sm text-medium-gray">
                   <p>• Direct Support Professionals</p>
                   <p>• Personal Care Assistants</p>
                   <p>• Respite Care Providers</p>
@@ -192,33 +201,33 @@ export default function Contact() {
               </div>
             </div>
             
-            <div className="bg-purple-50 p-8 rounded-2xl">
-              <h3 className="text-xl font-semibold text-dark-gray mb-6">Apply Today</h3>
-              <p className="text-medium-gray mb-6">
+            <div className="bg-white p-6 rounded-xl shadow-sm">
+              <h3 className="text-lg font-semibold text-dark-gray mb-4">Apply Today</h3>
+              <p className="text-medium-gray mb-5 text-sm">
                 Ready to make a difference? Send us your resume and tell us why you'd like to join our team.
               </p>
               
-              <div className="space-y-4">
-                <div className="flex items-center space-x-3 p-4 bg-white rounded-lg shadow-sm">
-                  <Mail className="h-5 w-5 text-royal-purple" />
+              <div className="space-y-3">
+                <div className="flex items-center space-x-3 p-3 bg-purple-50 rounded-lg">
+                  <Mail className="h-4 w-4 text-royal-purple" />
                   <div>
-                    <p className="font-medium text-dark-gray">Email Your Resume</p>
-                    <p className="text-sm text-medium-gray">careers@noahsarccare.com</p>
+                    <p className="font-medium text-dark-gray text-sm">Email Your Resume</p>
+                    <p className="text-xs text-medium-gray">careers@noahsarccare.com</p>
                   </div>
                 </div>
                 
-                <div className="flex items-center space-x-3 p-4 bg-white rounded-lg shadow-sm">
-                  <Phone className="h-5 w-5 text-royal-purple" />
+                <div className="flex items-center space-x-3 p-3 bg-purple-50 rounded-lg">
+                  <Phone className="h-4 w-4 text-royal-purple" />
                   <div>
-                    <p className="font-medium text-dark-gray">Call Us</p>
-                    <p className="text-sm text-medium-gray">(615) 782-1842</p>
+                    <p className="font-medium text-dark-gray text-sm">Call Us</p>
+                    <p className="text-xs text-medium-gray">(615) 782-1842</p>
                   </div>
                 </div>
               </div>
               
-              <div className="mt-6 p-4 bg-white rounded-lg">
+              <div className="mt-4 p-3 bg-gray-50 rounded-lg">
                 <p className="text-xs text-medium-gray">
-                  <strong>Equal Opportunity Employer:</strong> Noah's Arc Care is committed to providing equal employment opportunities regardless of race, color, religion, gender, age, disability, or veteran status.
+                  <strong>Equal Opportunity Employer:</strong> Noah's Arc Care provides equal employment opportunities.
                 </p>
               </div>
             </div>
@@ -226,31 +235,19 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Contact Form Section */}
-      <section className="py-20 bg-purple-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <MessageSquare className="h-16 w-16 royal-purple mx-auto mb-6" />
-            <h2 className="text-3xl lg:text-4xl font-bold text-dark-gray mb-4">Send Us a Message</h2>
-            <p className="text-xl text-medium-gray">
-              Fill out the form below and we'll get back to you as soon as possible with the information you need.
-            </p>
-          </div>
-          <ContactForm />
-        </div>
-      </section>
+
 
       {/* FAQ Section */}
-      <section className="py-20 bg-purple-50">
+      <section className="py-12 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-dark-gray mb-4">Frequently Asked Questions</h2>
-            <p className="text-xl text-medium-gray">
-              Quick answers to common questions about our services and how we can help.
+          <div className="text-center mb-10">
+            <h2 className="text-2xl lg:text-3xl font-bold text-dark-gray mb-3">Frequently Asked Questions</h2>
+            <p className="text-lg text-medium-gray">
+              Quick answers to common questions about our services.
             </p>
           </div>
           
-          <div className="space-y-8">
+          <div className="space-y-6">
             <div className="bg-white p-6 rounded-xl shadow-sm">
               <h3 className="text-xl font-semibold text-dark-gray mb-3">How quickly can services begin?</h3>
               <p className="text-medium-gray leading-relaxed">
