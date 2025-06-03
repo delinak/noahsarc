@@ -144,8 +144,90 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Contact Form Section */}
+      {/* Work with Us Section */}
       <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <Users className="h-16 w-16 royal-purple mx-auto mb-6" />
+            <h2 className="text-3xl lg:text-4xl font-bold text-dark-gray mb-4">Work with Us</h2>
+            <p className="text-xl text-medium-gray max-w-3xl mx-auto">
+              Join our compassionate team of caregivers dedicated to empowering individuals with intellectual and developmental disabilities.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <h3 className="text-2xl font-semibold text-dark-gray">Why Work at Noah's Arc Care?</h3>
+              <div className="space-y-4">
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-royal-purple rounded-full mt-2"></div>
+                  <p className="text-medium-gray">Competitive compensation and benefits package</p>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-royal-purple rounded-full mt-2"></div>
+                  <p className="text-medium-gray">Comprehensive training and professional development</p>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-royal-purple rounded-full mt-2"></div>
+                  <p className="text-medium-gray">Flexible scheduling options</p>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-royal-purple rounded-full mt-2"></div>
+                  <p className="text-medium-gray">Meaningful work that makes a real difference</p>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-royal-purple rounded-full mt-2"></div>
+                  <p className="text-medium-gray">Supportive team environment in Nashville, TN</p>
+                </div>
+              </div>
+              
+              <div className="bg-purple-50 p-6 rounded-xl">
+                <h4 className="font-semibold text-dark-gray mb-3">We're Looking For:</h4>
+                <div className="space-y-2 text-sm text-medium-gray">
+                  <p>• Direct Support Professionals</p>
+                  <p>• Personal Care Assistants</p>
+                  <p>• Respite Care Providers</p>
+                  <p>• Community Support Specialists</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-purple-50 p-8 rounded-2xl">
+              <h3 className="text-xl font-semibold text-dark-gray mb-6">Apply Today</h3>
+              <p className="text-medium-gray mb-6">
+                Ready to make a difference? Send us your resume and tell us why you'd like to join our team.
+              </p>
+              
+              <div className="space-y-4">
+                <div className="flex items-center space-x-3 p-4 bg-white rounded-lg shadow-sm">
+                  <Mail className="h-5 w-5 text-royal-purple" />
+                  <div>
+                    <p className="font-medium text-dark-gray">Email Your Resume</p>
+                    <p className="text-sm text-medium-gray">careers@noahsarccare.com</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center space-x-3 p-4 bg-white rounded-lg shadow-sm">
+                  <Phone className="h-5 w-5 text-royal-purple" />
+                  <div>
+                    <p className="font-medium text-dark-gray">Call Us</p>
+                    <p className="text-sm text-medium-gray">(615) 782-1842</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mt-6 p-4 bg-white rounded-lg">
+                <p className="text-xs text-medium-gray">
+                  <strong>Equal Opportunity Employer:</strong> Noah's Arc Care is committed to providing equal employment opportunities regardless of race, color, religion, gender, age, disability, or veteran status.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Form Section */}
+      <section className="py-20 bg-purple-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <MessageSquare className="h-16 w-16 royal-purple mx-auto mb-6" />

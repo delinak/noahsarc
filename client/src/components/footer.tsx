@@ -14,11 +14,9 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="flex items-center space-x-3 mb-4">
-              <img 
-                src="/Screenshot 2025-04-16 at 2.50.18 PM.png" 
-                alt="Noah's Arc Care Logo" 
-                className="h-16 w-auto"
-              />
+              <div className="w-16 h-16 bg-royal-purple rounded-full flex items-center justify-center">
+                <span className="text-white font-bold text-lg">NAC</span>
+              </div>
               <div>
                 <h3 className="text-2xl font-bold text-trust-blue">Noah's Arc Care</h3>
                 <p className="text-gray-400 text-sm">Empowering Lives Together</p>
