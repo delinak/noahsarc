@@ -13,7 +13,17 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold text-trust-blue">Noah's Arc Care</h3>
+            <div className="flex items-center space-x-3 mb-4">
+              <img 
+                src="/Screenshot 2025-04-16 at 2.50.18 PM.png" 
+                alt="Noah's Arc Care Logo" 
+                className="h-16 w-auto"
+              />
+              <div>
+                <h3 className="text-2xl font-bold text-trust-blue">Noah's Arc Care</h3>
+                <p className="text-gray-400 text-sm">Empowering Lives Together</p>
+              </div>
+            </div>
             <p className="text-gray-300 text-sm leading-relaxed">
               Empowering individuals with intellectual and developmental disabilities 
               through personalized and compassionate care.

@@ -21,12 +21,7 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <Link href="/" className="flex items-center space-x-3">
-                <img 
-                  src="/Screenshot 2025-04-16 at 2.50.18 PM.png" 
-                  alt="Noah's Arc Care Logo" 
-                  className="h-12 w-auto"
-                />
+              <Link href="/" className="flex items-center">
                 <div>
                   <h1 className="text-xl font-bold royal-purple cursor-pointer hover:text-purple-700 transition-colors">Noah's Arc Care</h1>
                   <p className="text-xs text-medium-gray font-medium">Empowering Lives Together</p>

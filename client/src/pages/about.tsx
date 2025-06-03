@@ -218,7 +218,7 @@ export default function About() {
             </div>
             <div className="mt-8">
               <p className="text-medium-gray text-lg leading-relaxed max-w-3xl mx-auto">
-                We are proud to serve the Kansas community and look forward to continuing our mission 
+                We are proud to serve the Tennessee community and look forward to continuing our mission 
                 of enhancing lives and fostering independence for many years to come.
               </p>
             </div>
