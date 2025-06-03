@@ -17,7 +17,7 @@ export default function Home() {
       <Navigation />
       
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-purple-50 via-purple-100 to-purple-200 py-20">
+      <section className="relative bg-gradient-to-br from-purple-50 via-purple-100 to-purple-200 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
@@ -106,16 +106,13 @@ export default function Home() {
       </section>
 
       {/* Services Preview */}
-      <section className="py-20 bg-purple-50">
+      <section className="py-12 bg-purple-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-dark-gray mb-4">Our Services</h2>
-            <p className="text-xl text-medium-gray max-w-3xl mx-auto">
-              Comprehensive support services designed to empower independence and enhance quality of life.
-            </p>
+          <div className="text-center mb-8">
+            <h2 className="text-2xl lg:text-3xl font-bold text-dark-gray mb-4">Our Services</h2>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             {quickServices.map((service, index) => (
               <div key={index} className="bg-white p-6 rounded-xl shadow-sm text-center hover:shadow-md transition-shadow">
                 <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4">
@@ -137,7 +134,7 @@ export default function Home() {
       </section>
 
       {/* About Preview */}
-      <section className="py-20 bg-white">
+      <section className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
@@ -172,7 +169,7 @@ export default function Home() {
       </section>
 
       {/* What Sets Us Apart */}
-      <section className="py-20 bg-gradient-to-r from-purple-600 to-purple-800 text-white">
+      <section className="py-12 bg-gradient-to-r from-purple-600 to-purple-800 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -216,7 +213,7 @@ export default function Home() {
       </section>
 
       {/* Contact Preview */}
-      <section className="py-20 bg-gradient-to-r from-purple-600 to-purple-800 text-white">
+      <section className="py-12 bg-gradient-to-r from-purple-600 to-purple-800 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold mb-4">Get In Touch</h2>

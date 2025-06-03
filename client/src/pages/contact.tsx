@@ -41,7 +41,7 @@ export default function Contact() {
       <Navigation />
       
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-purple-50 to-purple-100 py-12">
+      <section className="relative bg-gradient-to-br from-purple-50 to-purple-100 py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-3xl lg:text-4xl font-bold text-dark-gray mb-4">
@@ -55,7 +55,7 @@ export default function Contact() {
       </section>
 
       {/* Contact Form */}
-      <section className="py-16 bg-white">
+      <section className="py-10 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-dark-gray mb-4">Send Us a Message</h2>
