@@ -241,56 +241,7 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Service Process */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-dark-gray mb-4">How We Work With You</h2>
-            <p className="text-xl text-medium-gray max-w-3xl mx-auto">
-              Our collaborative approach ensures that every individual receives the right support at the right time.
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl font-bold royal-purple">1</span>
-              </div>
-              <h3 className="text-xl font-semibold text-dark-gray mb-3">Initial Consultation</h3>
-              <p className="text-medium-gray">
-                We meet with you to understand needs, goals, and preferences for care services.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl font-bold royal-purple">2</span>
-              </div>
-              <h3 className="text-xl font-semibold text-dark-gray mb-3">Care Planning</h3>
-              <p className="text-medium-gray">
-                Together, we develop a personalized care plan that addresses specific needs and goals.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl font-bold royal-purple">3</span>
-              </div>
-              <h3 className="text-xl font-semibold text-dark-gray mb-3">Service Delivery</h3>
-              <p className="text-medium-gray">
-                Our trained team provides services according to the care plan with ongoing support.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl font-bold royal-purple">4</span>
-              </div>
-              <h3 className="text-xl font-semibold text-dark-gray mb-3">Ongoing Review</h3>
-              <p className="text-medium-gray">
-                Regular evaluations ensure services continue to meet evolving needs and goals.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* Call to Action */}
       <section className="py-20 bg-gradient-to-r from-purple-600 to-purple-800 text-white">
