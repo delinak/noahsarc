@@ -161,35 +161,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* What Sets Us Apart */}
-      <section className="py-20 bg-gradient-to-r from-purple-600 to-purple-800 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl lg:text-4xl font-bold mb-6">What Sets Us Apart</h2>
-              <p className="text-purple-100 text-lg leading-relaxed mb-8">
-                At Noah's Arc Care, we believe that exceptional care comes from understanding, 
-                experience, and genuine commitment to each individual's success and well-being.
-              </p>
-              <div className="space-y-4">
-                {achievements.map((achievement, index) => (
-                  <div key={index} className="flex items-center space-x-3">
-                    <CheckCircle className="h-6 w-6 text-purple-200 flex-shrink-0" />
-                    <span className="text-purple-100">{achievement}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="relative">
-              <img
-                src="/pexels-shkrabaanthony-6281432.jpg"
-                alt="Professional care team member working with confidence and dedication"
-                className="rounded-2xl shadow-2xl w-full h-auto"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* Team Section */}
       <section className="py-20 bg-white">

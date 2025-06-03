@@ -1,7 +1,7 @@
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
-import { Heart, Users, ArrowRight, Phone, Mail, MapPin } from "lucide-react";
+import { Heart, Users, ArrowRight, Phone, Mail, MapPin, CheckCircle } from "lucide-react";
 import { Link } from "wouter";
 
 export default function Home() {
@@ -171,6 +171,50 @@ export default function Home() {
         </div>
       </section>
 
+      {/* What Sets Us Apart */}
+      <section className="py-20 bg-gradient-to-r from-purple-600 to-purple-800 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl lg:text-4xl font-bold mb-6">What Sets Us Apart</h2>
+              <p className="text-purple-100 text-lg leading-relaxed mb-8">
+                At Noah's Arc Care, we believe that exceptional care comes from understanding, 
+                experience, and genuine commitment to each individual's success and well-being.
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-center space-x-3">
+                  <CheckCircle className="h-6 w-6 text-purple-200 flex-shrink-0" />
+                  <span className="text-purple-100">Licensed and certified care provider in Tennessee</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <CheckCircle className="h-6 w-6 text-purple-200 flex-shrink-0" />
+                  <span className="text-purple-100">Over 20 years of combined experience</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <CheckCircle className="h-6 w-6 text-purple-200 flex-shrink-0" />
+                  <span className="text-purple-100">Specialized training in developmental disabilities</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <CheckCircle className="h-6 w-6 text-purple-200 flex-shrink-0" />
+                  <span className="text-purple-100">Strong community partnerships and referral network</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <CheckCircle className="h-6 w-6 text-purple-200 flex-shrink-0" />
+                  <span className="text-purple-100">Commitment to ongoing professional development</span>
+                </div>
+              </div>
+            </div>
+            <div className="relative">
+              <img
+                src="/pexels-shkrabaanthony-6281432.jpg"
+                alt="Professional care team member working with confidence and dedication"
+                className="rounded-2xl shadow-2xl w-full h-auto"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Preview */}
       <section className="py-20 bg-gradient-to-r from-purple-600 to-purple-800 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -200,18 +244,11 @@ export default function Home() {
           </div>
           
           <div className="text-center">
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
-                <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-purple-600 px-8 py-4 font-semibold">
-                  Contact Us Today
-                </Button>
-              </Link>
-              <Link href="/register">
-                <Button size="lg" className="bg-white text-purple-600 hover:bg-purple-50 px-8 py-4">
-                  Register for Services
-                </Button>
-              </Link>
-            </div>
+            <Link href="/contact">
+              <Button size="lg" variant="outline" className="border-2 border-white text-purple-600 bg-white hover:bg-purple-50 px-8 py-4 font-semibold">
+                Contact Us Today
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

@@ -11,7 +11,7 @@ export default function Services() {
       title: "Supportive Living",
       description: "Personalized living support that promotes independence while providing necessary assistance for daily activities and community integration.",
       features: [
-        "On-call support available",
+        "Professional support staff",
         "Assistance with daily living activities",
         "Medication management and health monitoring",
         "Community integration support",

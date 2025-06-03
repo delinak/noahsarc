@@ -54,19 +54,7 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Contact Form Section - Moved to top */}
-      <section className="py-12 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <MessageSquare className="h-12 w-12 royal-purple mx-auto mb-4" />
-            <h2 className="text-2xl lg:text-3xl font-bold text-dark-gray mb-3">Send Us a Message</h2>
-            <p className="text-lg text-medium-gray mb-6">
-              Have questions about our services or need assistance? Fill out the form below and we'll get back to you quickly with the information you need.
-            </p>
-          </div>
-          <ContactForm />
-        </div>
-      </section>
+
 
       {/* Contact Methods */}
       <section className="py-12 bg-purple-50">
@@ -194,16 +182,7 @@ export default function Contact() {
               </AccordionContent>
             </AccordionItem>
             
-            <AccordionItem value="item-3" className="bg-white rounded-xl shadow-sm border-0">
-              <AccordionTrigger className="px-6 py-4 text-left text-lg font-semibold text-dark-gray hover:no-underline">
-                Do you accept insurance or Medicaid?
-              </AccordionTrigger>
-              <AccordionContent className="px-6 pb-4 text-medium-gray leading-relaxed">
-                Yes, we work with various insurance providers and participate in Medicaid waiver programs, 
-                including the Katie Beckett program. We'll help you understand your coverage options and 
-                work with you to maximize available benefits.
-              </AccordionContent>
-            </AccordionItem>
+
             
             <AccordionItem value="item-4" className="bg-white rounded-xl shadow-sm border-0">
               <AccordionTrigger className="px-6 py-4 text-left text-lg font-semibold text-dark-gray hover:no-underline">
