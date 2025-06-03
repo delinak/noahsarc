@@ -130,15 +130,14 @@ export default function Services() {
       <Navigation />
       
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-purple-50 to-purple-100 py-20">
+      <section className="relative bg-gradient-to-br from-purple-50 to-purple-100 py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl lg:text-5xl font-bold text-dark-gray mb-6">
               Our <span className="royal-purple">Services</span>
             </h1>
-            <p className="text-xl text-medium-gray max-w-3xl mx-auto leading-relaxed mb-8">
-              Comprehensive support services designed to empower independence, enhance quality of life, 
-              and help individuals with intellectual and developmental disabilities thrive in their communities.
+            <p className="text-lg text-medium-gray max-w-2xl mx-auto mb-6">
+              Quality support services for individuals with intellectual and developmental disabilities.
             </p>
             <Link href="/contact">
               <Button size="lg" className="bg-royal-purple text-white hover:bg-purple-700 px-8 py-4">
@@ -150,7 +149,7 @@ export default function Services() {
       </section>
 
       {/* Featured Service Image */}
-      <section className="py-20 bg-white">
+      <section className="py-10 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-16">
             <img
