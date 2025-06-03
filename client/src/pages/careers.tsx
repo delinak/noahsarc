@@ -125,7 +125,7 @@ export default function Careers() {
       <section className="py-16 bg-purple-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-2xl lg:text-3xl font-bold text-dark-gray mb-4">Open Positions</h2>
+            <h2 className="text-2xl lg:text-3xl font-bold text-dark-gray mb-4">Positions</h2>
             <p className="text-lg text-medium-gray">
               Explore current opportunities to join our team and make a difference.
             </p>

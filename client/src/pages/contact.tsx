@@ -54,7 +54,21 @@ export default function Contact() {
         </div>
       </section>
 
-
+      {/* Contact Form */}
+      <section className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-dark-gray mb-4">Send Us a Message</h2>
+            <p className="text-xl text-medium-gray max-w-2xl mx-auto">
+              Fill out the form below and we'll get back to you within 24 hours.
+            </p>
+          </div>
+          
+          <div className="bg-purple-50 rounded-2xl p-8 md:p-12">
+            <ContactForm />
+          </div>
+        </div>
+      </section>
 
       {/* Contact Methods */}
       <section className="py-12 bg-purple-50">

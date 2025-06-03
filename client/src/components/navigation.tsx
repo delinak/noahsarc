@@ -46,11 +46,6 @@ export default function Navigation() {
                   </button>
                 </Link>
               ))}
-              <Link href="/contact">
-                <Button className="bg-royal-purple text-white hover:bg-purple-700">
-                  Contact Us
-                </Button>
-              </Link>
             </div>
           </div>
 
