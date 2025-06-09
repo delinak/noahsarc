@@ -23,8 +23,8 @@ export default function Contact() {
     {
       icon: MapPin,
       title: "Visit Our Office",
-      detail: "Nashville, Tennessee",
-      description: "Suite D-106, 2201 Murfreesboro Pike, Nashville TN 37217",
+      detail: "Nolensville, Tennessee",
+      description: "7211 Halye Industrial Blvd, Nolensville, TN 37135",
       available: "Serving Tennessee communities with quality care"
     }
   ];

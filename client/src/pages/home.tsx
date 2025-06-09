@@ -235,8 +235,8 @@ export default function Home() {
             </div>
             <div className="text-center">
               <MapPin className="h-12 w-12 text-purple-200 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Nashville Office</h3>
-              <p className="text-purple-100">Suite D-106, 2201 Murfreesboro Pike</p>
+              <h3 className="text-xl font-semibold mb-2">Nolensville Office</h3>
+              <p className="text-purple-100">7211 Halye Industrial Blvd, Nolensville, TN 37135</p>
             </div>
           </div>
           

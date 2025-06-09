@@ -194,7 +194,7 @@ export default function Careers() {
                   <MapPin className="h-5 w-5 text-royal-purple" />
                   <div>
                     <p className="font-medium text-dark-gray">Visit Our Office</p>
-                    <p className="text-sm text-medium-gray">Suite D-106, 2201 Murfreesboro Pike<br />Nashville, TN 37217</p>
+                    <p className="text-sm text-medium-gray">7211 Halye Industrial Blvd<br />Nolensville, TN 37135</p>
                   </div>
                 </div>
               </div>

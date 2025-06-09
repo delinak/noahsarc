@@ -125,7 +125,7 @@ export default function Footer() {
               </div>
               <div className="flex items-start space-x-2">
                 <MapPin className="h-4 w-4 text-royal-purple mt-1" />
-                <span>Suite D-106, 2201 Murfreesboro Pike<br />Nashville, TN 37217</span>
+                <span>7211 Halye Industrial Blvd<br />Nolensville, TN 37135</span>
               </div>
             </div>
           </div>
