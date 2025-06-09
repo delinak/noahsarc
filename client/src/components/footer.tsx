@@ -17,21 +17,10 @@ export default function Footer() {
               <h3 className="text-2xl font-bold text-trust-blue">Noah's Arc Care</h3>
               <p className="text-gray-400 text-sm">Empowering Lives Together</p>
             </div>
-            <p className="text-gray-300 text-sm leading-relaxed">
+            <p className="text-gray-200 text-sm leading-relaxed">
               Empowering individuals with intellectual and developmental disabilities 
               through personalized and compassionate care.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-trust-blue transition-colors">
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-trust-blue transition-colors">
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-trust-blue transition-colors">
-                <Instagram className="h-5 w-5" />
-              </a>
-            </div>
           </div>
           
           <div>
@@ -114,7 +103,7 @@ export default function Footer() {
           
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
-            <div className="space-y-3 text-sm text-gray-300">
+            <div className="space-y-3 text-sm text-gray-200">
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4 text-royal-purple" />
                 <span>(615) 782-1842</span>
@@ -131,7 +120,7 @@ export default function Footer() {
           </div>
         </div>
         
-        <div className="border-t border-gray-600 mt-8 pt-8 text-center text-sm text-gray-400">
+        <div className="border-t border-gray-600 mt-8 pt-8 text-center text-sm text-gray-200">
           <p>&copy; 2024 Noah's Arc Care, LLC. All rights reserved. | Licensed Care Provider</p>
         </div>
       </div>

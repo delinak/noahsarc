@@ -252,7 +252,7 @@ export default function Services() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact">
-              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-purple-600 px-8 py-4 font-semibold">
+              <Button size="lg" variant="outline" className="border-2 border-white text-purple-600 bg-white hover:bg-purple-50 px-8 py-4 font-semibold">
                 Contact Us Today
               </Button>
             </Link>

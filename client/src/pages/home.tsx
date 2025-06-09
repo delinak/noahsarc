@@ -133,40 +133,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Preview */}
-      <section className="py-12 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h2 className="text-3xl lg:text-4xl font-bold text-dark-gray">What Inspired Us?</h2>
-              <div className="space-y-4 text-medium-gray leading-relaxed">
-                <p>
-                  For over twenty years, we have had the privilege of supporting individuals with a range 
-                  of developmental disabilities in various roles. Our dedication to providing high-quality 
-                  care, empowering individuals, and advocating for their rights and needs has been the 
-                  foundation of our careers.
-                </p>
-                <p>
-                  Inspired by this commitment, we founded Noah's Arc Care, LLC, 
-                  to continue our mission of enhancing lives and fostering independence.
-                </p>
-              </div>
-              <Link href="/about">
-                <Button className="bg-royal-purple text-white hover:bg-purple-700">
-                  Read Our Full Story <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-            </div>
-            <div className="relative">
-              <img
-                src="/pexels-cliff-booth-4058053.jpg"
-                alt="Professional caregiver providing compassionate support in a comfortable environment"
-                className="rounded-2xl shadow-xl w-4/5 h-auto"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* What Sets Us Apart */}
       <section className="py-12 bg-gradient-to-r from-purple-600 to-purple-800 text-white">
@@ -240,10 +207,15 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="text-center">
+          <div className="text-center space-x-4">
             <Link href="/contact">
               <Button size="lg" variant="outline" className="border-2 border-white text-purple-600 bg-white hover:bg-purple-50 px-8 py-4 font-semibold">
                 Contact Us Today
+              </Button>
+            </Link>
+            <Link href="/careers">
+              <Button size="lg" className="bg-purple-800 hover:bg-purple-900 text-white px-8 py-4 font-semibold">
+                Join the Mission
               </Button>
             </Link>
           </div>
