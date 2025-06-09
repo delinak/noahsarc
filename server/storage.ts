@@ -10,6 +10,10 @@ export interface IStorage {
   createJobApplication(application: InsertJobApplication): Promise<JobApplication>;
   getContactInquiries(): Promise<ContactInquiry[]>;
   getJobApplications(): Promise<JobApplication[]>;
+  updateContactInquiry(id: number, updates: Partial<ContactInquiry>): Promise<ContactInquiry>;
+  updateJobApplication(id: number, updates: Partial<JobApplication>): Promise<JobApplication>;
+  deleteContactInquiry(id: number): Promise<void>;
+  deleteJobApplication(id: number): Promise<void>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -53,6 +57,32 @@ export class DatabaseStorage implements IStorage {
 
   async getJobApplications(): Promise<JobApplication[]> {
     return await db.select().from(jobApplications).orderBy(jobApplications.id);
+  }
+
+  async updateContactInquiry(id: number, updates: Partial<ContactInquiry>): Promise<ContactInquiry> {
+    const [inquiry] = await db
+      .update(contactInquiries)
+      .set({ ...updates, updatedAt: new Date() })
+      .where(eq(contactInquiries.id, id))
+      .returning();
+    return inquiry;
+  }
+
+  async updateJobApplication(id: number, updates: Partial<JobApplication>): Promise<JobApplication> {
+    const [application] = await db
+      .update(jobApplications)
+      .set({ ...updates, updatedAt: new Date() })
+      .where(eq(jobApplications.id, id))
+      .returning();
+    return application;
+  }
+
+  async deleteContactInquiry(id: number): Promise<void> {
+    await db.delete(contactInquiries).where(eq(contactInquiries.id, id));
+  }
+
+  async deleteJobApplication(id: number): Promise<void> {
+    await db.delete(jobApplications).where(eq(jobApplications.id, id));
   }
 }
 

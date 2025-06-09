@@ -17,7 +17,10 @@ export const contactInquiries = pgTable("contact_inquiries", {
   inquiryType: text("inquiry_type").notNull(),
   message: text("message").notNull(),
   privacyConsent: boolean("privacy_consent").notNull(),
+  status: text("status").default("new").notNull(), // new, viewed, archived, replied
+  notes: text("notes"),
   createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 });
 
 export const jobApplications = pgTable("job_applications", {
@@ -31,7 +34,10 @@ export const jobApplications = pgTable("job_applications", {
   availability: text("availability"),
   coverLetter: text("cover_letter"),
   resumeFileName: text("resume_file_name"),
+  status: text("status").default("new").notNull(), // new, reviewed, interviewed, hired, declined
+  notes: text("notes"),
   createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 });
 
 export const insertUserSchema = createInsertSchema(users).pick({

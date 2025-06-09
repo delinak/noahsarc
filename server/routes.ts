@@ -109,6 +109,64 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Update contact inquiry status/notes
+  app.patch("/api/contact/:id", adminAuth, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const updates = req.body;
+      const inquiry = await storage.updateContactInquiry(id, updates);
+      res.json({ success: true, inquiry });
+    } catch (error) {
+      res.status(500).json({ 
+        success: false, 
+        message: "Failed to update inquiry" 
+      });
+    }
+  });
+
+  // Update job application status/notes
+  app.patch("/api/job-applications/:id", adminAuth, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const updates = req.body;
+      const application = await storage.updateJobApplication(id, updates);
+      res.json({ success: true, application });
+    } catch (error) {
+      res.status(500).json({ 
+        success: false, 
+        message: "Failed to update application" 
+      });
+    }
+  });
+
+  // Delete contact inquiry
+  app.delete("/api/contact/:id", adminAuth, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      await storage.deleteContactInquiry(id);
+      res.json({ success: true });
+    } catch (error) {
+      res.status(500).json({ 
+        success: false, 
+        message: "Failed to delete inquiry" 
+      });
+    }
+  });
+
+  // Delete job application
+  app.delete("/api/job-applications/:id", adminAuth, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      await storage.deleteJobApplication(id);
+      res.json({ success: true });
+    } catch (error) {
+      res.status(500).json({ 
+        success: false, 
+        message: "Failed to delete application" 
+      });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
