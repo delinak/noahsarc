@@ -19,6 +19,9 @@ import type { ContactInquiry, JobApplication } from "@shared/schema";
 export default function Admin() {
   const [selectedTab, setSelectedTab] = useState("overview");
   const [, setLocation] = useLocation();
+  const [editingItem, setEditingItem] = useState<{type: 'contact' | 'job', id: number, data: any} | null>(null);
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
 
   // Check authentication
   useEffect(() => {
@@ -83,6 +86,95 @@ export default function Admin() {
   const contactInquiries: ContactInquiry[] = contactData?.inquiries || [];
   const jobApplications: JobApplication[] = jobApplicationData?.applications || [];
 
+  // Mutations for CRUD operations
+  const updateContactMutation = useMutation({
+    mutationFn: async ({ id, updates }: { id: number, updates: Partial<ContactInquiry> }) => {
+      const token = localStorage.getItem("adminToken");
+      const response = await fetch(`/api/contact/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updates),
+      });
+      if (!response.ok) throw new Error('Failed to update');
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/contact"] });
+      toast({ title: "Success", description: "Contact inquiry updated successfully" });
+    },
+    onError: () => {
+      toast({ title: "Error", description: "Failed to update contact inquiry", variant: "destructive" });
+    },
+  });
+
+  const updateJobMutation = useMutation({
+    mutationFn: async ({ id, updates }: { id: number, updates: Partial<JobApplication> }) => {
+      const token = localStorage.getItem("adminToken");
+      const response = await fetch(`/api/job-applications/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updates),
+      });
+      if (!response.ok) throw new Error('Failed to update');
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/job-applications"] });
+      toast({ title: "Success", description: "Job application updated successfully" });
+    },
+    onError: () => {
+      toast({ title: "Error", description: "Failed to update job application", variant: "destructive" });
+    },
+  });
+
+  const deleteContactMutation = useMutation({
+    mutationFn: async (id: number) => {
+      const token = localStorage.getItem("adminToken");
+      const response = await fetch(`/api/contact/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) throw new Error('Failed to delete');
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/contact"] });
+      toast({ title: "Success", description: "Contact inquiry deleted successfully" });
+    },
+    onError: () => {
+      toast({ title: "Error", description: "Failed to delete contact inquiry", variant: "destructive" });
+    },
+  });
+
+  const deleteJobMutation = useMutation({
+    mutationFn: async (id: number) => {
+      const token = localStorage.getItem("adminToken");
+      const response = await fetch(`/api/job-applications/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) throw new Error('Failed to delete');
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/job-applications"] });
+      toast({ title: "Success", description: "Job application deleted successfully" });
+    },
+    onError: () => {
+      toast({ title: "Error", description: "Failed to delete job application", variant: "destructive" });
+    },
+  });
+
   const formatDate = (date: Date | string) => {
     return new Date(date).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -101,6 +193,46 @@ export default function Admin() {
       support: "bg-orange-100 text-orange-800"
     };
     return colors[type as keyof typeof colors] || "bg-gray-100 text-gray-800";
+  };
+
+  const getStatusColor = (status: string) => {
+    const colors = {
+      new: "bg-red-100 text-red-800",
+      viewed: "bg-blue-100 text-blue-800",
+      replied: "bg-green-100 text-green-800",
+      archived: "bg-gray-100 text-gray-800",
+      reviewed: "bg-blue-100 text-blue-800",
+      interviewed: "bg-purple-100 text-purple-800",
+      hired: "bg-green-100 text-green-800",
+      declined: "bg-gray-100 text-gray-800"
+    };
+    return colors[status as keyof typeof colors] || "bg-gray-100 text-gray-800";
+  };
+
+  const handleStatusChange = (type: 'contact' | 'job', id: number, status: string) => {
+    if (type === 'contact') {
+      updateContactMutation.mutate({ id, updates: { status } });
+    } else {
+      updateJobMutation.mutate({ id, updates: { status } });
+    }
+  };
+
+  const handleNotesUpdate = (type: 'contact' | 'job', id: number, notes: string) => {
+    if (type === 'contact') {
+      updateContactMutation.mutate({ id, updates: { notes } });
+    } else {
+      updateJobMutation.mutate({ id, updates: { notes } });
+    }
+  };
+
+  const handleDelete = (type: 'contact' | 'job', id: number) => {
+    if (confirm(`Are you sure you want to delete this ${type === 'contact' ? 'inquiry' : 'application'}?`)) {
+      if (type === 'contact') {
+        deleteContactMutation.mutate(id);
+      } else {
+        deleteJobMutation.mutate(id);
+      }
+    }
   };
 
   if (contactLoading || jobApplicationLoading) {
@@ -282,6 +414,88 @@ export default function Admin() {
                       <div className="bg-gray-50 p-4 rounded-lg">
                         <p className="text-sm leading-relaxed">{inquiry.message}</p>
                       </div>
+                      
+                      <div className="flex items-center justify-between pt-4 border-t">
+                        <div className="flex items-center space-x-4">
+                          <div className="space-y-1">
+                            <Label className="text-xs">Status</Label>
+                            <Select
+                              value={inquiry.status || "new"}
+                              onValueChange={(value) => handleStatusChange('contact', inquiry.id, value)}
+                            >
+                              <SelectTrigger className="w-32 h-8">
+                                <SelectValue />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="new">New</SelectItem>
+                                <SelectItem value="viewed">Viewed</SelectItem>
+                                <SelectItem value="replied">Replied</SelectItem>
+                                <SelectItem value="archived">Archived</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          <Badge className={getStatusColor(inquiry.status || "new")}>
+                            {inquiry.status || "new"}
+                          </Badge>
+                        </div>
+                        
+                        <div className="flex items-center space-x-2">
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Button variant="outline" size="sm">
+                                <Edit className="h-4 w-4 mr-1" />
+                                Notes
+                              </Button>
+                            </DialogTrigger>
+                            <DialogContent>
+                              <DialogHeader>
+                                <DialogTitle>Edit Notes</DialogTitle>
+                                <DialogDescription>
+                                  Add or update notes for this inquiry
+                                </DialogDescription>
+                              </DialogHeader>
+                              <div className="space-y-4">
+                                <Textarea
+                                  placeholder="Add notes about this inquiry..."
+                                  defaultValue={inquiry.notes || ""}
+                                  onChange={(e) => {
+                                    setEditingItem({
+                                      type: 'contact',
+                                      id: inquiry.id,
+                                      data: { notes: e.target.value }
+                                    });
+                                  }}
+                                />
+                                <Button
+                                  onClick={() => {
+                                    if (editingItem?.data?.notes !== undefined) {
+                                      handleNotesUpdate('contact', inquiry.id, editingItem.data.notes);
+                                      setEditingItem(null);
+                                    }
+                                  }}
+                                >
+                                  Save Notes
+                                </Button>
+                              </div>
+                            </DialogContent>
+                          </Dialog>
+                          
+                          <Button
+                            variant="destructive"
+                            size="sm"
+                            onClick={() => handleDelete('contact', inquiry.id)}
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      </div>
+                      
+                      {inquiry.notes && (
+                        <div className="bg-blue-50 p-3 rounded-lg mt-2">
+                          <Label className="text-xs font-medium text-blue-800">Admin Notes:</Label>
+                          <p className="text-sm text-blue-700 mt-1">{inquiry.notes}</p>
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -343,6 +557,89 @@ export default function Admin() {
                         <div className="space-y-2">
                           <h4 className="font-semibold">Cover Letter</h4>
                           <p className="text-sm bg-gray-50 p-3 rounded">{application.coverLetter}</p>
+                        </div>
+                      )}
+
+                      <div className="flex items-center justify-between pt-4 border-t">
+                        <div className="flex items-center space-x-4">
+                          <div className="space-y-1">
+                            <Label className="text-xs">Status</Label>
+                            <Select
+                              value={application.status || "new"}
+                              onValueChange={(value) => handleStatusChange('job', application.id, value)}
+                            >
+                              <SelectTrigger className="w-32 h-8">
+                                <SelectValue />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="new">New</SelectItem>
+                                <SelectItem value="reviewed">Reviewed</SelectItem>
+                                <SelectItem value="interviewed">Interviewed</SelectItem>
+                                <SelectItem value="hired">Hired</SelectItem>
+                                <SelectItem value="declined">Declined</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          <Badge className={getStatusColor(application.status || "new")}>
+                            {application.status || "new"}
+                          </Badge>
+                        </div>
+                        
+                        <div className="flex items-center space-x-2">
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Button variant="outline" size="sm">
+                                <Edit className="h-4 w-4 mr-1" />
+                                Notes
+                              </Button>
+                            </DialogTrigger>
+                            <DialogContent>
+                              <DialogHeader>
+                                <DialogTitle>Edit Notes</DialogTitle>
+                                <DialogDescription>
+                                  Add or update notes for this application
+                                </DialogDescription>
+                              </DialogHeader>
+                              <div className="space-y-4">
+                                <Textarea
+                                  placeholder="Add notes about this application..."
+                                  defaultValue={application.notes || ""}
+                                  onChange={(e) => {
+                                    setEditingItem({
+                                      type: 'job',
+                                      id: application.id,
+                                      data: { notes: e.target.value }
+                                    });
+                                  }}
+                                />
+                                <Button
+                                  onClick={() => {
+                                    if (editingItem?.data?.notes !== undefined) {
+                                      handleNotesUpdate('job', application.id, editingItem.data.notes);
+                                      setEditingItem(null);
+                                    }
+                                  }}
+                                >
+                                  Save Notes
+                                </Button>
+                              </div>
+                            </DialogContent>
+                          </Dialog>
+                          
+                          <Button
+                            variant="destructive"
+                            size="sm"
+                            onClick={() => handleDelete('job', application.id)}
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      </div>
+                      
+                      {application.notes && (
+                        <div className="bg-blue-50 p-3 rounded-lg mt-2">
+                          <Label className="text-xs font-medium text-blue-800">Admin Notes:</Label>
+                          <p className="text-sm text-blue-700 mt-1">{application.notes}</p>
                         </div>
                       )}
 
