@@ -1,4 +1,4 @@
-import { Facebook, Linkedin, Instagram, Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin } from "lucide-react";
 
 export default function Footer() {
   const scrollToSection = (sectionId: string) => {
@@ -29,7 +29,7 @@ export default function Footer() {
               <li>
                 <button 
                   onClick={() => scrollToSection("services")}
-                  className="text-gray-300 hover:text-white transition-colors text-left"
+                  className="text-gray-200 hover:text-white transition-colors text-left"
                 >
                   Supportive Living
                 </button>
@@ -37,7 +37,7 @@ export default function Footer() {
               <li>
                 <button 
                   onClick={() => scrollToSection("services")}
-                  className="text-gray-300 hover:text-white transition-colors text-left"
+                  className="text-gray-200 hover:text-white transition-colors text-left"
                 >
                   Respite Care
                 </button>
@@ -45,7 +45,7 @@ export default function Footer() {
               <li>
                 <button 
                   onClick={() => scrollToSection("services")}
-                  className="text-gray-300 hover:text-white transition-colors text-left"
+                  className="text-gray-200 hover:text-white transition-colors text-left"
                 >
                   Community Transportation
                 </button>
@@ -53,7 +53,7 @@ export default function Footer() {
               <li>
                 <button 
                   onClick={() => scrollToSection("services")}
-                  className="text-gray-300 hover:text-white transition-colors text-left"
+                  className="text-gray-200 hover:text-white transition-colors text-left"
                 >
                   Personal Assistance
                 </button>
@@ -67,7 +67,7 @@ export default function Footer() {
               <li>
                 <button 
                   onClick={() => scrollToSection("about")}
-                  className="text-gray-300 hover:text-white transition-colors text-left"
+                  className="text-gray-200 hover:text-white transition-colors text-left"
                 >
                   About Us
                 </button>
@@ -75,7 +75,7 @@ export default function Footer() {
               <li>
                 <button 
                   onClick={() => scrollToSection("contact")}
-                  className="text-gray-300 hover:text-white transition-colors text-left"
+                  className="text-gray-200 hover:text-white transition-colors text-left"
                 >
                   Contact
                 </button>
@@ -83,18 +83,18 @@ export default function Footer() {
               <li>
                 <button 
                   onClick={() => scrollToSection("register")}
-                  className="text-gray-300 hover:text-white transition-colors text-left"
+                  className="text-gray-200 hover:text-white transition-colors text-left"
                 >
                   Register
                 </button>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                <a href="#" className="text-gray-200 hover:text-white transition-colors">
                   Privacy Policy
                 </a>
               </li>
               <li>
-                <a href="/admin" className="text-gray-300 hover:text-white transition-colors">
+                <a href="/admin" className="text-gray-200 hover:text-white transition-colors">
                   Admin Panel
                 </a>
               </li>
