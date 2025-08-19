@@ -1,6 +1,5 @@
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
-import JobApplicationForm from "@/components/job-application-form";
 import { Phone, Mail, Users, Heart, Shield, Clock, Award, MapPin } from "lucide-react";
 
 export default function Careers() {
@@ -234,13 +233,6 @@ export default function Careers() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Job Application Form */}
-      <section className="py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <JobApplicationForm />
         </div>
       </section>
 

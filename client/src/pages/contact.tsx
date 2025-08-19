@@ -1,8 +1,6 @@
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
-import ContactForm from "@/components/contact-form";
 import { Phone, Mail, MapPin, Clock, MessageSquare, Heart, Users } from "lucide-react";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 export default function Contact() {
   const contactMethods = [
@@ -54,15 +52,14 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Contact Form */}
+      {/* Contact Information */}
       <section className="py-10 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
-            <h2 className="text-2xl lg:text-3xl font-bold text-dark-gray mb-4">Send Us a Message</h2>
-          </div>
-          
-          <div className="bg-purple-50 rounded-2xl p-8 md:p-12">
-            <ContactForm />
+            <h2 className="text-2xl lg:text-3xl font-bold text-dark-gray mb-4">Ready to Connect?</h2>
+            <p className="text-lg text-medium-gray">
+              Our team is standing by to answer your questions and discuss how we can support you and your loved ones.
+            </p>
           </div>
         </div>
       </section>
@@ -168,41 +165,33 @@ export default function Contact() {
             </p>
           </div>
           
-          <Accordion type="single" collapsible className="space-y-4">
-            <AccordionItem value="item-1" className="bg-white rounded-xl shadow-sm border-0">
-              <AccordionTrigger className="px-6 py-4 text-left text-lg font-semibold text-dark-gray hover:no-underline">
-                How quickly can services begin?
-              </AccordionTrigger>
-              <AccordionContent className="px-6 pb-4 text-medium-gray leading-relaxed">
+          <div className="space-y-6">
+            <div className="bg-purple-50 rounded-xl p-6">
+              <h3 className="text-lg font-semibold text-dark-gray mb-3">How quickly can services begin?</h3>
+              <p className="text-medium-gray leading-relaxed">
                 Service timelines vary based on individual needs and availability. We work to begin services 
                 as quickly as possible while ensuring proper planning and preparation. During your initial 
                 consultation, we'll provide a realistic timeline for your specific situation.
-              </AccordionContent>
-            </AccordionItem>
+              </p>
+            </div>
             
-            <AccordionItem value="item-2" className="bg-white rounded-xl shadow-sm border-0">
-              <AccordionTrigger className="px-6 py-4 text-left text-lg font-semibold text-dark-gray hover:no-underline">
-                What areas do you serve?
-              </AccordionTrigger>
-              <AccordionContent className="px-6 pb-4 text-medium-gray leading-relaxed">
+            <div className="bg-purple-50 rounded-xl p-6">
+              <h3 className="text-lg font-semibold text-dark-gray mb-3">What areas do you serve?</h3>
+              <p className="text-medium-gray leading-relaxed">
                 We proudly serve communities throughout Tennessee, with our primary service area centered around 
                 Nashville. Contact us to confirm service availability in your specific location.
-              </AccordionContent>
-            </AccordionItem>
+              </p>
+            </div>
             
-
-            
-            <AccordionItem value="item-4" className="bg-white rounded-xl shadow-sm border-0">
-              <AccordionTrigger className="px-6 py-4 text-left text-lg font-semibold text-dark-gray hover:no-underline">
-                What makes Noah's Arc Care different?
-              </AccordionTrigger>
-              <AccordionContent className="px-6 pb-4 text-medium-gray leading-relaxed">
+            <div className="bg-purple-50 rounded-xl p-6">
+              <h3 className="text-lg font-semibold text-dark-gray mb-3">What makes Noah's Arc Care different?</h3>
+              <p className="text-medium-gray leading-relaxed">
                 Our 20+ years of experience, person-centered approach, and genuine commitment to each individual's 
                 success sets us apart. We focus on building long-term relationships and empowering independence 
                 rather than just providing services.
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 

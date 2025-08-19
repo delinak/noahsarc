@@ -1,17 +1,10 @@
 import { Switch, Route, useLocation } from "wouter";
 import { useEffect } from "react";
-import { queryClient } from "./lib/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
-import { Toaster } from "@/components/ui/toaster";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import Home from "@/pages/home";
 import About from "@/pages/about";
 import Services from "@/pages/services";
 import Careers from "@/pages/careers";
 import Contact from "@/pages/contact";
-
-import Admin from "@/pages/admin";
-import AdminLogin from "@/pages/admin-login";
 import NotFound from "@/pages/not-found";
 
 // Component to handle scroll to top on route change
@@ -35,8 +28,6 @@ function Router() {
         <Route path="/services" component={Services} />
         <Route path="/careers" component={Careers} />
         <Route path="/contact" component={Contact} />
-        <Route path="/admin" component={Admin} />
-        <Route path="/admin-login" component={AdminLogin} />
         <Route component={NotFound} />
       </Switch>
     </>
@@ -44,14 +35,7 @@ function Router() {
 }
 
 function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Router />
-      </TooltipProvider>
-    </QueryClientProvider>
-  );
+  return <Router />;
 }
 
 export default App;
