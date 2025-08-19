@@ -1,304 +1,290 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { insertJobApplicationSchema } from "@shared/schema";
-import { apiRequest } from "@/lib/queryClient";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useToast } from "@/hooks/use-toast";
-import { CheckCircle, Send } from "lucide-react";
-import { z } from "zod";
-
-const jobApplicationFormSchema = insertJobApplicationSchema.extend({
-  firstName: z.string().min(1, "First name is required"),
-  lastName: z.string().min(1, "Last name is required"),
-  email: z.string().email("Please enter a valid email address"),
-  phone: z.string().min(10, "Please enter a valid phone number"),
-  position: z.string().min(1, "Please select a position"),
-});
-
-type JobApplicationFormData = z.infer<typeof jobApplicationFormSchema>;
+import { Mail, Phone, MapPin, Users, Heart, Shield, Clock, Award } from "lucide-react";
 
 export default function JobApplicationForm() {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const { toast } = useToast();
-  const queryClient = useQueryClient();
-
-  const form = useForm<JobApplicationFormData>({
-    resolver: zodResolver(jobApplicationFormSchema),
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      position: "",
-      experience: "",
-      availability: "",
-      coverLetter: "",
-      resumeFileName: "",
+  const benefits = [
+    {
+      icon: Heart,
+      title: "Competitive Compensation",
+      description: "Competitive salary and comprehensive benefits package including health, dental, and vision insurance."
     },
-  });
-
-  const mutation = useMutation({
-    mutationFn: async (data: JobApplicationFormData) => {
-      const response = await fetch("/api/jobs/apply", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || "Failed to submit application");
-      }
-      
-      return response.json();
+    {
+      icon: Award,
+      title: "Professional Development",
+      description: "Ongoing training opportunities, certification support, and career advancement paths."
     },
-    onSuccess: () => {
-      setIsSubmitted(true);
-      toast({
-        title: "Application Submitted Successfully!",
-        description: "Thank you for your interest in joining our team. We'll review your application and get back to you soon.",
-      });
-      form.reset();
-      queryClient.invalidateQueries({ queryKey: ["/api/job-applications"] });
+    {
+      icon: Clock,
+      title: "Flexible Scheduling",
+      description: "Work-life balance with flexible scheduling options to fit your lifestyle."
     },
-    onError: (error) => {
-      toast({
-        title: "Submission Failed",
-        description: error.message || "There was an error submitting your application. Please try again.",
-        variant: "destructive",
-      });
+    {
+      icon: Shield,
+      title: "Job Security",
+      description: "Stable employment with a growing company that values long-term relationships."
+    }
+  ];
+
+  const positions = [
+    {
+      title: "Direct Support Professional",
+      type: "Full-time / Part-time",
+      description: "Provide direct care and support to individuals with intellectual and developmental disabilities in their homes and community settings.",
+      requirements: [
+        "High school diploma or equivalent",
+        "Compassionate and patient personality",
+        "Reliable transportation",
+        "Background check and drug screening"
+      ]
     },
-  });
+    {
+      title: "Personal Care Assistant",
+      type: "Full-time / Part-time",
+      description: "Assist individuals with daily living activities including personal hygiene, meal preparation, and household tasks.",
+      requirements: [
+        "Previous caregiving experience preferred",
+        "Ability to lift up to 50 pounds",
+        "CPR certification (or willing to obtain)",
+        "Excellent communication skills"
+      ]
+    },
+    {
+      title: "Respite Care Provider",
+      type: "Part-time / As needed",
+      description: "Provide temporary relief care for families, offering short-term support and supervision.",
+      requirements: [
+        "Flexible schedule availability",
+        "Experience with developmental disabilities",
+        "Valid driver's license",
+        "First aid certification preferred"
+      ]
+    },
+    {
+      title: "Community Support Specialist",
+      type: "Full-time",
+      description: "Support individuals in accessing community resources and developing independent living skills.",
+      requirements: [
+        "Bachelor's degree in related field preferred",
+        "Knowledge of community resources",
+        "Strong organizational skills",
+        "Bilingual abilities a plus"
+      ]
+    }
+  ];
 
-  const onSubmit = (data: JobApplicationFormData) => {
-    mutation.mutate(data);
-  };
-
-  if (isSubmitted) {
-    return (
-      <Card className="max-w-2xl mx-auto">
-        <CardContent className="text-center py-12">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle className="h-8 w-8 text-green-600" />
-          </div>
-          <h3 className="text-2xl font-semibold text-dark-gray mb-4">Application Submitted!</h3>
-          <p className="text-medium-gray mb-6">
-            Thank you for your interest in joining Noah's Arc Care. We've received your application and will review it carefully. 
-            We'll contact you within 5-7 business days to discuss next steps.
-          </p>
-          <Button 
-            onClick={() => setIsSubmitted(false)}
-            variant="outline"
-            className="border-royal-purple text-royal-purple hover:bg-royal-purple hover:text-white"
-          >
-            Submit Another Application
-          </Button>
-        </CardContent>
-      </Card>
-    );
-  }
+  const applicationSteps = [
+    {
+      step: "1",
+      title: "Prepare Your Materials",
+      description: "Gather your resume, cover letter, and references to submit with your application."
+    },
+    {
+      step: "2",
+      title: "Contact Us",
+      description: "Reach out via phone, email, or visit our office to express your interest."
+    },
+    {
+      step: "3",
+      title: "Initial Discussion",
+      description: "We'll discuss the position, your experience, and answer any questions you have."
+    },
+    {
+      step: "4",
+      title: "Formal Application",
+      description: "Complete the formal application process and provide required documentation."
+    }
+  ];
 
   return (
-    <Card className="max-w-2xl mx-auto">
-      <CardHeader className="text-center">
-        <CardTitle className="text-2xl font-bold text-dark-gray">Join Our Team</CardTitle>
-        <CardDescription className="text-medium-gray">
-          Ready to make a difference? Submit your application below and become part of our compassionate care team.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            {/* Personal Information */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-dark-gray">Personal Information</h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                <FormField
-                  control={form.control}
-                  name="firstName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>First Name *</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Enter your first name" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="lastName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Last Name *</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Enter your last name" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Why Work With Us */}
+      <div className="text-center mb-12">
+        <h2 className="text-2xl lg:text-3xl font-bold text-dark-gray mb-4">Why Choose Noah's Arc Care?</h2>
+        <p className="text-lg text-medium-gray max-w-2xl mx-auto">
+          We believe in supporting our team members so they can provide the best possible care.
+        </p>
+      </div>
+      
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+        {benefits.map((benefit, index) => {
+          const IconComponent = benefit.icon;
+          return (
+            <div key={index} className="text-center p-6 bg-purple-50 rounded-xl">
+              <div className="w-14 h-14 bg-royal-purple rounded-full flex items-center justify-center mx-auto mb-4">
+                <IconComponent className="h-7 w-7 text-white" />
               </div>
-              <div className="grid md:grid-cols-2 gap-4">
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email Address *</FormLabel>
-                      <FormControl>
-                        <Input type="email" placeholder="your@email.com" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="phone"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Phone Number *</FormLabel>
-                      <FormControl>
-                        <Input placeholder="(555) 123-4567" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+              <h3 className="text-lg font-semibold text-dark-gray mb-3">{benefit.title}</h3>
+              <p className="text-medium-gray text-sm leading-relaxed">{benefit.description}</p>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Open Positions */}
+      <div className="mb-16">
+        <div className="text-center mb-12">
+          <h2 className="text-2xl lg:text-3xl font-bold text-dark-gray mb-4">Current Positions</h2>
+          <p className="text-lg text-medium-gray">
+            Explore current opportunities to join our team and make a difference.
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-2 gap-8">
+          {positions.map((position, index) => (
+            <div key={index} className="bg-white p-6 rounded-xl shadow-sm">
+              <div className="flex justify-between items-start mb-4">
+                <h3 className="text-xl font-semibold text-dark-gray">{position.title}</h3>
+                <span className="text-sm text-royal-purple font-medium bg-purple-100 px-3 py-1 rounded-full">
+                  {position.type}
+                </span>
+              </div>
+              <p className="text-medium-gray mb-4 text-sm leading-relaxed">{position.description}</p>
+              
+              <div className="space-y-2">
+                <h4 className="font-semibold text-dark-gray text-sm">Requirements:</h4>
+                <ul className="space-y-1">
+                  {position.requirements.map((req, i) => (
+                    <li key={i} className="text-xs text-medium-gray flex items-start space-x-2">
+                      <span className="text-royal-purple mt-1">•</span>
+                      <span>{req}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
+          ))}
+        </div>
+      </div>
 
-            {/* Position Information */}
+      {/* Application Process */}
+      <div className="mb-16">
+        <div className="text-center mb-12">
+          <h2 className="text-2xl lg:text-3xl font-bold text-dark-gray mb-4">How to Apply</h2>
+          <p className="text-lg text-medium-gray">
+            Ready to start your rewarding career with us? Here's how to get started.
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-2 gap-8">
+          <div className="bg-purple-50 p-8 rounded-xl">
+            <h3 className="text-xl font-semibold text-dark-gray mb-6">Submit Your Application</h3>
+            
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-dark-gray">Position Details</h3>
-              <FormField
-                control={form.control}
-                name="position"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Position Applying For *</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select a position" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="direct-support-professional">Direct Support Professional</SelectItem>
-                        <SelectItem value="personal-care-assistant">Personal Care Assistant</SelectItem>
-                        <SelectItem value="community-navigator">Community Navigator</SelectItem>
-                        <SelectItem value="transportation-specialist">Transportation Specialist</SelectItem>
-                        <SelectItem value="other">Other (specify in cover letter)</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="availability"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Availability</FormLabel>
-                    <FormControl>
-                      <Input placeholder="e.g., Full-time, Part-time, Weekends, etc." {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <div className="flex items-center space-x-3 p-4 bg-white rounded-lg shadow-sm">
+                <Mail className="h-5 w-5 text-royal-purple" />
+                <div>
+                  <p className="font-medium text-dark-gray">Email Your Resume</p>
+                  <p className="text-sm text-medium-gray">careers@noahsarccare.com</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center space-x-3 p-4 bg-white rounded-lg shadow-sm">
+                <Phone className="h-5 w-5 text-royal-purple" />
+                <div>
+                  <p className="font-medium text-dark-gray">Call Us</p>
+                  <p className="text-sm text-medium-gray">(615) 782-1842</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center space-x-3 p-4 bg-white rounded-lg shadow-sm">
+                <MapPin className="h-5 w-5 text-royal-purple" />
+                <div>
+                  <p className="font-medium text-dark-gray">Visit Our Office</p>
+                  <p className="text-sm text-medium-gray">7211 Halye Industrial Blvd<br />Nolensville, TN 37135</p>
+                </div>
+              </div>
             </div>
-
-            {/* Experience and Additional Information */}
+          </div>
+          
+          <div className="space-y-6">
+            <h3 className="text-xl font-semibold text-dark-gray">What to Include</h3>
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-dark-gray">Experience & Background</h3>
-              <FormField
-                control={form.control}
-                name="experience"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Relevant Experience</FormLabel>
-                    <FormControl>
-                      <Textarea 
-                        placeholder="Describe your relevant work experience, education, or volunteer activities..."
-                        className="min-h-[120px]"
-                        {...field} 
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="coverLetter"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Why do you want to work with us?</FormLabel>
-                    <FormControl>
-                      <Textarea 
-                        placeholder="Tell us about your passion for helping others and why you'd be a great fit for our team..."
-                        className="min-h-[120px]"
-                        {...field} 
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="resumeFileName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Resume (Optional)</FormLabel>
-                    <FormControl>
-                      <Input 
-                        placeholder="If you have a resume file, please mention the filename here"
-                        {...field} 
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <div className="flex items-start space-x-3">
+                <div className="w-2 h-2 bg-royal-purple rounded-full mt-2"></div>
+                <div>
+                  <p className="font-medium text-dark-gray">Current Resume</p>
+                  <p className="text-sm text-medium-gray">Include relevant work experience and education</p>
+                </div>
+              </div>
+              <div className="flex items-start space-x-3">
+                <div className="w-2 h-2 bg-royal-purple rounded-full mt-2"></div>
+                <div>
+                  <p className="font-medium text-dark-gray">Cover Letter</p>
+                  <p className="text-sm text-medium-gray">Tell us why you want to join our team</p>
+                </div>
+              </div>
+              <div className="flex items-start space-x-3">
+                <div className="w-2 h-2 bg-royal-purple rounded-full mt-2"></div>
+                <div>
+                  <p className="font-medium text-dark-gray">References</p>
+                  <p className="text-sm text-medium-gray">Professional references who can speak to your abilities</p>
+                </div>
+              </div>
             </div>
-
-            <div className="pt-6">
-              <Button 
-                type="submit" 
-                disabled={mutation.isPending}
-                className="w-full bg-royal-purple text-white hover:bg-purple-700 py-3"
-              >
-                {mutation.isPending ? (
-                  "Submitting Application..."
-                ) : (
-                  <>
-                    <Send className="h-4 w-4 mr-2" />
-                    Submit Application
-                  </>
-                )}
-              </Button>
+            
+            <div className="mt-8 p-4 bg-gray-50 rounded-lg">
+              <p className="text-xs text-medium-gray">
+                <strong>Equal Opportunity Employer:</strong> Noah's Arc Care is committed to providing equal employment 
+                opportunities regardless of race, color, religion, gender, age, disability, or veteran status.
+              </p>
             </div>
+          </div>
+        </div>
+      </div>
 
-            <p className="text-xs text-medium-gray text-center">
-              By submitting this application, you agree to our review process. We'll contact qualified candidates within 5-7 business days.
-            </p>
-          </form>
-        </Form>
-      </CardContent>
-    </Card>
+      {/* Application Steps */}
+      <div className="mb-16">
+        <div className="text-center mb-12">
+          <h2 className="text-2xl lg:text-3xl font-bold text-dark-gray mb-4">Application Process</h2>
+          <p className="text-lg text-medium-gray">
+            A simple, straightforward process to get you connected with our team.
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {applicationSteps.map((item, index) => (
+            <div key={index} className="bg-white p-6 rounded-xl shadow-sm text-center">
+              <div className="w-12 h-12 bg-royal-purple rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-xl font-bold text-white">{item.step}</span>
+              </div>
+              <h3 className="text-lg font-semibold text-dark-gray mb-3">{item.title}</h3>
+              <p className="text-sm text-medium-gray leading-relaxed">
+                {item.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Call to Action */}
+      <div className="bg-royal-purple rounded-2xl p-8 text-center text-white">
+        <Users className="h-16 w-16 mx-auto mb-6" />
+        <h2 className="text-3xl font-bold mb-4">Ready to Join Our Team?</h2>
+        <p className="text-lg mb-8 max-w-2xl mx-auto">
+          Take the first step toward a rewarding career helping others. Contact us today to discuss opportunities 
+          and begin your application process.
+        </p>
+        
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <a 
+            href="tel:(615) 782-1842"
+            className="inline-flex items-center justify-center px-8 py-4 bg-white text-royal-purple rounded-lg hover:bg-gray-100 transition-colors text-lg font-semibold"
+          >
+            <Phone className="h-5 w-5 mr-2" />
+            Call (615) 782-1842
+          </a>
+          <a 
+            href="mailto:careers@noahsarccare.com"
+            className="inline-flex items-center justify-center px-8 py-4 bg-hope-green text-white rounded-lg hover:bg-green-700 transition-colors text-lg font-semibold"
+          >
+            <Mail className="h-5 w-5 mr-2" />
+            Email Careers
+          </a>
+        </div>
+        
+        <p className="text-sm mt-6 opacity-90">
+          We typically respond to career inquiries within 24-48 hours. For immediate assistance, please call us directly.
+        </p>
+      </div>
+    </div>
   );
 }

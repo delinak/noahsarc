@@ -1,95 +1,36 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { useMutation } from "@tanstack/react-query";
-import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
-import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
-import { insertContactInquirySchema } from "@shared/schema";
-
-const contactFormSchema = insertContactInquirySchema.extend({
-  privacyConsent: z.boolean().refine(val => val === true, {
-    message: "You must consent to being contacted"
-  })
-});
-
-type ContactFormData = z.infer<typeof contactFormSchema>;
+import { Mail, Phone, MapPin, Clock } from "lucide-react";
 
 export default function ContactForm() {
-  const { toast } = useToast();
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const form = useForm<ContactFormData>({
-    resolver: zodResolver(contactFormSchema),
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      inquiryType: "",
-      message: "",
-      privacyConsent: false,
+  const contactMethods = [
+    {
+      icon: Phone,
+      title: "Call Us",
+      detail: "(615) 782-1842",
+      description: "Speak directly with our caring team about your needs and questions.",
+      available: "Monday - Friday, 8:00 AM - 6:00 PM"
     },
-  });
-
-  const contactMutation = useMutation({
-    mutationFn: async (data: ContactFormData) => {
-      return await apiRequest("POST", "/api/contact", data);
+    {
+      icon: Mail,
+      title: "Email Us",
+      detail: "bneway@noahsarccare.com",
+      description: "Send us a detailed message and we'll respond within 24 hours.",
+      available: "We check email regularly throughout the day"
     },
-    onSuccess: () => {
-      setIsSubmitted(true);
-      form.reset();
-      toast({
-        title: "Message sent successfully!",
-        description: "Thank you for your inquiry. We will get back to you within 24 hours.",
-      });
-    },
-    onError: (error) => {
-      toast({
-        title: "Error sending message",
-        description: "Please try again or contact us directly.",
-        variant: "destructive",
-      });
-    },
-  });
+    {
+      icon: MapPin,
+      title: "Visit Our Office",
+      detail: "Nolensville, Tennessee",
+      description: "7211 Halye Industrial Blvd, Nolensville, TN 37135",
+      available: "Serving Tennessee communities with quality care"
+    }
+  ];
 
-  const onSubmit = (data: ContactFormData) => {
-    contactMutation.mutate(data);
-  };
-
-  if (isSubmitted) {
-    return (
-      <section id="contact" className="py-20 bg-light-gray">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
-            <div className="w-16 h-16 bg-hope-green rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
-            <h3 className="text-2xl font-bold text-dark-gray mb-4">Thank You!</h3>
-            <p className="text-medium-gray mb-6">
-              Your message has been sent successfully. We appreciate your interest in Noah's Arc Care 
-              and will respond to your inquiry within 24 hours.
-            </p>
-            <Button 
-              onClick={() => setIsSubmitted(false)}
-              variant="outline"
-              className="border-trust-blue text-trust-blue hover:bg-trust-blue hover:text-white"
-            >
-              Send Another Message
-            </Button>
-          </div>
-        </div>
-      </section>
-    );
-  }
+  const officeHours = [
+    { day: "Monday - Friday", hours: "8:00 AM - 6:00 PM" },
+    { day: "Saturday", hours: "9:00 AM - 2:00 PM" },
+    { day: "Sunday", hours: "Emergency calls only" },
+    { day: "Emergency Contact", hours: "Available for urgent needs during business hours" }
+  ];
 
   return (
     <section id="contact" className="py-20 bg-light-gray">
@@ -101,158 +42,105 @@ export default function ContactForm() {
           </p>
         </div>
         
+        {/* Contact Methods */}
+        <div className="bg-white rounded-2xl shadow-lg p-8 mb-12">
+          <h3 className="text-2xl font-bold text-dark-gray mb-6 text-center">How to Reach Us</h3>
+          <div className="grid md:grid-cols-3 gap-6">
+            {contactMethods.map((method, index) => {
+              const IconComponent = method.icon;
+              return (
+                <div key={index} className="bg-purple-50 p-6 rounded-xl text-center hover:shadow-md transition-shadow">
+                  <div className="w-14 h-14 bg-royal-purple rounded-full flex items-center justify-center mx-auto mb-4">
+                    <IconComponent className="h-7 w-7 text-white" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-dark-gray mb-2">{method.title}</h3>
+                  <p className="text-xl font-bold text-royal-purple mb-2">{method.detail}</p>
+                  <p className="text-medium-gray mb-3 text-sm leading-relaxed">{method.description}</p>
+                  <p className="text-xs text-medium-gray font-medium">{method.available}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Office Hours & Location Info */}
+        <div className="bg-white rounded-2xl shadow-lg p-8 mb-12">
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div>
+              <div className="flex items-center mb-6">
+                <Clock className="h-8 w-8 text-royal-purple mr-3" />
+                <h3 className="text-2xl font-bold text-dark-gray">Office Hours</h3>
+              </div>
+              <div className="space-y-4">
+                {officeHours.map((schedule, index) => (
+                  <div key={index} className="flex justify-between items-center py-2 border-b border-purple-100 last:border-b-0">
+                    <span className="font-medium text-dark-gray">{schedule.day}</span>
+                    <span className="text-medium-gray">{schedule.hours}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-6 p-4 bg-purple-50 rounded-lg">
+                <p className="text-sm text-medium-gray">
+                  <strong>Emergency Support:</strong> For urgent situations outside of business hours, 
+                  please call our main number and follow the prompts for emergency assistance.
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <div className="flex items-center mb-6">
+                <MapPin className="h-8 w-8 text-royal-purple mr-3" />
+                <h3 className="text-2xl font-bold text-dark-gray">Location & Directions</h3>
+              </div>
+              <div className="space-y-4">
+                <div className="p-4 bg-purple-50 rounded-lg">
+                  <p className="font-medium text-dark-gray mb-2">Our Office Address:</p>
+                  <p className="text-medium-gray text-sm">
+                    7211 Halye Industrial Blvd<br />
+                    Nolensville, TN 37135
+                  </p>
+                </div>
+                <div className="p-4 bg-purple-50 rounded-lg">
+                  <p className="font-medium text-dark-gray mb-2">Service Area:</p>
+                  <p className="text-medium-gray text-sm">
+                    We proudly serve communities throughout Tennessee, with our primary service area centered around Nashville.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Quick Contact Actions */}
         <div className="bg-white rounded-2xl shadow-lg p-8">
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <FormField
-                  control={form.control}
-                  name="firstName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-dark-gray font-medium">First Name *</FormLabel>
-                      <FormControl>
-                        <Input 
-                          placeholder="Enter your first name" 
-                          className="focus:ring-trust-blue focus:border-trust-blue"
-                          {...field} 
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="lastName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-dark-gray font-medium">Last Name *</FormLabel>
-                      <FormControl>
-                        <Input 
-                          placeholder="Enter your last name" 
-                          className="focus:ring-trust-blue focus:border-trust-blue"
-                          {...field} 
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-dark-gray font-medium">Email Address *</FormLabel>
-                      <FormControl>
-                        <Input 
-                          type="email"
-                          placeholder="your.email@example.com" 
-                          className="focus:ring-trust-blue focus:border-trust-blue"
-                          {...field} 
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="phone"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-dark-gray font-medium">Phone Number</FormLabel>
-                      <FormControl>
-                        <Input 
-                          type="tel"
-                          placeholder="(555) 123-4567" 
-                          className="focus:ring-trust-blue focus:border-trust-blue"
-                          {...field} 
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-
-              <FormField
-                control={form.control}
-                name="inquiryType"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-dark-gray font-medium">Type of Inquiry *</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger className="focus:ring-trust-blue focus:border-trust-blue">
-                          <SelectValue placeholder="Select inquiry type" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="general">General Information</SelectItem>
-                        <SelectItem value="services">Service Details</SelectItem>
-                        <SelectItem value="registration">Client Registration</SelectItem>
-                        <SelectItem value="support">Support Questions</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="message"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-dark-gray font-medium">Your Message *</FormLabel>
-                    <FormControl>
-                      <Textarea 
-                        placeholder="Please share your questions or tell us how we can help..."
-                        className="resize-none h-32 focus:ring-trust-blue focus:border-trust-blue"
-                        {...field} 
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="privacyConsent"
-                render={({ field }) => (
-                  <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                    <FormControl>
-                      <Checkbox
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                        className="data-[state=checked]:bg-trust-blue data-[state=checked]:border-trust-blue"
-                      />
-                    </FormControl>
-                    <div className="space-y-1 leading-none">
-                      <FormLabel className="text-sm text-medium-gray">
-                        I consent to Noah's Arc Care contacting me about services and support. *
-                      </FormLabel>
-                      <FormMessage />
-                    </div>
-                  </FormItem>
-                )}
-              />
-
-              <Button 
-                type="submit" 
-                disabled={contactMutation.isPending}
-                className="w-full bg-trust-blue text-white hover:bg-blue-700 py-4"
-              >
-                {contactMutation.isPending ? "Sending..." : "Send Message"}
-              </Button>
-            </form>
-          </Form>
+          <h3 className="text-2xl font-bold text-dark-gray mb-6 text-center">Ready to Connect?</h3>
+          <p className="text-lg text-medium-gray text-center mb-8">
+            Our team is standing by to answer your questions and discuss how we can support you and your loved ones.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a 
+              href="tel:(615) 782-1842"
+              className="inline-flex items-center justify-center px-8 py-4 bg-royal-purple text-white rounded-lg hover:bg-purple-700 transition-colors text-lg font-semibold"
+            >
+              <Phone className="h-5 w-5 mr-2" />
+              Call Us Now
+            </a>
+            <a 
+              href="mailto:bneway@noahsarccare.com"
+              className="inline-flex items-center justify-center px-8 py-4 bg-hope-green text-white rounded-lg hover:bg-green-700 transition-colors text-lg font-semibold"
+            >
+              <Mail className="h-5 w-5 mr-2" />
+              Send Email
+            </a>
+          </div>
+          
+          <div className="mt-8 p-4 bg-purple-50 rounded-lg text-center">
+            <p className="text-sm text-medium-gray">
+              <strong>Response Time:</strong> We typically respond to inquiries within 24 hours, often much sooner. 
+              For urgent matters, please call us directly.
+            </p>
+          </div>
         </div>
       </div>
     </section>

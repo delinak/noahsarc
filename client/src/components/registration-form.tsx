@@ -1,119 +1,52 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { useMutation } from "@tanstack/react-query";
-import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
-import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
-import { insertClientRegistrationSchema } from "@shared/schema";
-
-const registrationFormSchema = insertClientRegistrationSchema.extend({
-  services: z.array(z.string()).min(1, "Please select at least one service"),
-  registrationConsent: z.boolean().refine(val => val === true, {
-    message: "You must consent to registration"
-  }),
-  hipaaConsent: z.boolean().refine(val => val === true, {
-    message: "You must acknowledge HIPAA practices"
-  })
-});
-
-type RegistrationFormData = z.infer<typeof registrationFormSchema>;
+import { Mail, Phone, MapPin, Clock } from "lucide-react";
 
 export default function RegistrationForm() {
-  const { toast } = useToast();
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const form = useForm<RegistrationFormData>({
-    resolver: zodResolver(registrationFormSchema),
-    defaultValues: {
-      clientFirstName: "",
-      clientLastName: "",
-      clientDob: "",
-      clientGender: "",
-      insuranceId: "",
-      contactFirstName: "",
-      contactLastName: "",
-      relationship: "",
-      contactEmail: "",
-      contactPhone: "",
-      services: [],
-      specialNeeds: "",
-      goals: "",
-      registrationConsent: false,
-      hipaaConsent: false,
+  const contactMethods = [
+    {
+      icon: Mail,
+      title: "Email Registration",
+      detail: "bneway@noahsarccare.com",
+      description: "Send us an email with your registration details and we'll respond within 24 hours.",
+      available: "We check email regularly throughout the day"
     },
-  });
-
-  const registrationMutation = useMutation({
-    mutationFn: async (data: RegistrationFormData) => {
-      return await apiRequest("POST", "/api/register", data);
+    {
+      icon: Phone,
+      title: "Call to Register",
+      detail: "(615) 782-1842",
+      description: "Speak directly with our caring team about registration and your care needs.",
+      available: "Monday - Friday, 8:00 AM - 6:00 PM"
     },
-    onSuccess: () => {
-      setIsSubmitted(true);
-      form.reset();
-      toast({
-        title: "Registration submitted successfully!",
-        description: "Thank you for registering. We will contact you within 24 hours to discuss next steps.",
-      });
-    },
-    onError: (error) => {
-      toast({
-        title: "Error submitting registration",
-        description: "Please try again or contact us directly.",
-        variant: "destructive",
-      });
-    },
-  });
-
-  const onSubmit = (data: RegistrationFormData) => {
-    registrationMutation.mutate(data);
-  };
-
-  const serviceOptions = [
-    { value: "supportive-living", label: "Supportive Living" },
-    { value: "respite", label: "Respite Care" },
-    { value: "transportation", label: "Community Transportation" },
-    { value: "family-model", label: "Family Model" },
-    { value: "personal-assistance", label: "Personal Assistance" },
-    { value: "stabilization", label: "Stabilization & Transition" },
-    { value: "day-facility", label: "Adult Habilitation Day Facility" },
-    { value: "skills-training", label: "Independent Living Skills Training" },
-    { value: "katie-beckett", label: "Katie Beckett Program" },
+    {
+      icon: MapPin,
+      title: "Visit Our Office",
+      detail: "Nolensville, Tennessee",
+      description: "7211 Halye Industrial Blvd, Nolensville, TN 37135",
+      available: "Schedule an in-person consultation"
+    }
   ];
 
-  if (isSubmitted) {
-    return (
-      <section id="register" className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-green-50 rounded-2xl shadow-lg p-8 text-center">
-            <div className="w-16 h-16 bg-hope-green rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
-            <h3 className="text-2xl font-bold text-dark-gray mb-4">Registration Received!</h3>
-            <p className="text-medium-gray mb-6">
-              Thank you for submitting your client registration. Our team will review your information 
-              and contact you within 24 hours to discuss next steps and answer any questions you may have.
-            </p>
-            <Button 
-              onClick={() => setIsSubmitted(false)}
-              variant="outline"
-              className="border-hope-green text-hope-green hover:bg-hope-green hover:text-white"
-            >
-              Submit Another Registration
-            </Button>
-          </div>
-        </div>
-      </section>
-    );
-  }
+  const registrationSteps = [
+    {
+      step: "1",
+      title: "Contact Us",
+      description: "Reach out via phone, email, or visit our office to begin the registration process."
+    },
+    {
+      step: "2", 
+      title: "Initial Consultation",
+      description: "Our team will schedule an in-depth consultation to understand your care needs."
+    },
+    {
+      step: "3",
+      title: "Care Plan Development",
+      description: "Together, we'll develop a personalized care plan that addresses your specific goals."
+    },
+    {
+      step: "4",
+      title: "Service Implementation",
+      description: "We begin providing services according to the care plan with ongoing support."
+    }
+  ];
 
   return (
     <section id="register" className="py-20 bg-white">
@@ -121,369 +54,97 @@ export default function RegistrationForm() {
         <div className="text-center mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold text-dark-gray mb-4">Client Registration</h2>
           <p className="text-xl text-medium-gray">
-            Ready to get started? Complete our registration form to begin your journey with Noah's Arc Care.
+            Ready to get started? Contact us directly to begin your journey with Noah's Arc Care.
           </p>
         </div>
         
-        <div className="bg-green-50 rounded-2xl shadow-lg p-8">
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              
-              {/* Client Information */}
-              <div className="space-y-6">
-                <h3 className="text-xl font-semibold text-dark-gray border-b border-gray-200 pb-2">Client Information</h3>
-                
-                <div className="grid md:grid-cols-2 gap-6">
-                  <FormField
-                    control={form.control}
-                    name="clientFirstName"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-dark-gray font-medium">Client First Name *</FormLabel>
-                        <FormControl>
-                          <Input 
-                            placeholder="Client's first name" 
-                            className="focus:ring-hope-green focus:border-hope-green"
-                            {...field} 
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="clientLastName"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-dark-gray font-medium">Client Last Name *</FormLabel>
-                        <FormControl>
-                          <Input 
-                            placeholder="Client's last name" 
-                            className="focus:ring-hope-green focus:border-hope-green"
-                            {...field} 
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+        {/* Contact Methods for Registration */}
+        <div className="bg-green-50 rounded-2xl shadow-lg p-8 mb-12">
+          <h3 className="text-2xl font-bold text-dark-gray mb-6 text-center">How to Register</h3>
+          <div className="grid md:grid-cols-3 gap-6">
+            {contactMethods.map((method, index) => {
+              const IconComponent = method.icon;
+              return (
+                <div key={index} className="bg-white p-6 rounded-xl shadow-sm text-center hover:shadow-md transition-shadow">
+                  <div className="w-14 h-14 bg-hope-green rounded-full flex items-center justify-center mx-auto mb-4">
+                    <IconComponent className="h-7 w-7 text-white" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-dark-gray mb-2">{method.title}</h3>
+                  <p className="text-xl font-bold text-hope-green mb-2">{method.detail}</p>
+                  <p className="text-medium-gray mb-3 text-sm leading-relaxed">{method.description}</p>
+                  <p className="text-xs text-medium-gray font-medium">{method.available}</p>
                 </div>
-                
-                <div className="grid md:grid-cols-3 gap-6">
-                  <FormField
-                    control={form.control}
-                    name="clientDob"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-dark-gray font-medium">Date of Birth *</FormLabel>
-                        <FormControl>
-                          <Input 
-                            type="date"
-                            className="focus:ring-hope-green focus:border-hope-green"
-                            {...field} 
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="clientGender"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-dark-gray font-medium">Gender</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                            <SelectTrigger className="focus:ring-hope-green focus:border-hope-green">
-                              <SelectValue placeholder="Select gender" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="male">Male</SelectItem>
-                            <SelectItem value="female">Female</SelectItem>
-                            <SelectItem value="other">Other</SelectItem>
-                            <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="insuranceId"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-dark-gray font-medium">Insurance ID</FormLabel>
-                        <FormControl>
-                          <Input 
-                            placeholder="Insurance identification" 
-                            className="focus:ring-hope-green focus:border-hope-green"
-                            {...field} 
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Registration Process */}
+        <div className="bg-purple-50 rounded-2xl shadow-lg p-8 mb-12">
+          <h3 className="text-2xl font-bold text-dark-gray mb-6 text-center">Our Registration Process</h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {registrationSteps.map((item, index) => (
+              <div key={index} className="bg-white p-6 rounded-xl shadow-sm text-center">
+                <div className="w-12 h-12 bg-royal-purple rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-xl font-bold text-white">{item.step}</span>
                 </div>
+                <h3 className="text-lg font-semibold text-dark-gray mb-3">{item.title}</h3>
+                <p className="text-sm text-medium-gray leading-relaxed">
+                  {item.description}
+                </p>
               </div>
+            ))}
+          </div>
+        </div>
 
-              {/* Contact Information */}
-              <div className="space-y-6">
-                <h3 className="text-xl font-semibold text-dark-gray border-b border-gray-200 pb-2">Contact Information</h3>
-                
-                <div className="grid md:grid-cols-2 gap-6">
-                  <FormField
-                    control={form.control}
-                    name="contactFirstName"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-dark-gray font-medium">Contact Person First Name *</FormLabel>
-                        <FormControl>
-                          <Input 
-                            placeholder="Your first name" 
-                            className="focus:ring-hope-green focus:border-hope-green"
-                            {...field} 
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="contactLastName"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-dark-gray font-medium">Contact Person Last Name *</FormLabel>
-                        <FormControl>
-                          <Input 
-                            placeholder="Your last name" 
-                            className="focus:ring-hope-green focus:border-hope-green"
-                            {...field} 
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
-                <FormField
-                  control={form.control}
-                  name="relationship"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-dark-gray font-medium">Relationship to Client *</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger className="focus:ring-hope-green focus:border-hope-green">
-                            <SelectValue placeholder="Select relationship" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="parent">Parent/Guardian</SelectItem>
-                          <SelectItem value="family">Family Member</SelectItem>
-                          <SelectItem value="self">Self</SelectItem>
-                          <SelectItem value="advocate">Advocate</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <FormField
-                    control={form.control}
-                    name="contactEmail"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-dark-gray font-medium">Email Address *</FormLabel>
-                        <FormControl>
-                          <Input 
-                            type="email"
-                            placeholder="your.email@example.com" 
-                            className="focus:ring-hope-green focus:border-hope-green"
-                            {...field} 
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="contactPhone"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-dark-gray font-medium">Phone Number *</FormLabel>
-                        <FormControl>
-                          <Input 
-                            type="tel"
-                            placeholder="(555) 123-4567" 
-                            className="focus:ring-hope-green focus:border-hope-green"
-                            {...field} 
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-              </div>
-
-              {/* Services Needed */}
-              <div className="space-y-6">
-                <h3 className="text-xl font-semibold text-dark-gray border-b border-gray-200 pb-2">Services Needed</h3>
-                
-                <FormField
-                  control={form.control}
-                  name="services"
-                  render={() => (
-                    <FormItem>
-                      <div className="grid md:grid-cols-2 gap-4">
-                        {serviceOptions.map((service) => (
-                          <FormField
-                            key={service.value}
-                            control={form.control}
-                            name="services"
-                            render={({ field }) => {
-                              return (
-                                <FormItem
-                                  key={service.value}
-                                  className="flex flex-row items-center space-x-3 space-y-0 p-3 border border-gray-200 rounded-lg hover:bg-gray-50"
-                                >
-                                  <FormControl>
-                                    <Checkbox
-                                      checked={field.value?.includes(service.value)}
-                                      onCheckedChange={(checked) => {
-                                        return checked
-                                          ? field.onChange([...field.value, service.value])
-                                          : field.onChange(
-                                              field.value?.filter(
-                                                (value) => value !== service.value
-                                              )
-                                            )
-                                      }}
-                                      className="data-[state=checked]:bg-hope-green data-[state=checked]:border-hope-green"
-                                    />
-                                  </FormControl>
-                                  <FormLabel className="text-dark-gray cursor-pointer">
-                                    {service.label}
-                                  </FormLabel>
-                                </FormItem>
-                              )
-                            }}
-                          />
-                        ))}
-                      </div>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-
-              {/* Additional Information */}
-              <div className="space-y-6">
-                <h3 className="text-xl font-semibold text-dark-gray border-b border-gray-200 pb-2">Additional Information</h3>
-                
-                <FormField
-                  control={form.control}
-                  name="specialNeeds"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-dark-gray font-medium">Special Needs or Considerations</FormLabel>
-                      <FormControl>
-                        <Textarea 
-                          placeholder="Please describe any special needs, medical conditions, or specific support requirements..."
-                          className="resize-none h-24 focus:ring-hope-green focus:border-hope-green"
-                          {...field} 
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="goals"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-dark-gray font-medium">Goals and Aspirations</FormLabel>
-                      <FormControl>
-                        <Textarea 
-                          placeholder="What are the client's goals and what would they like to achieve?"
-                          className="resize-none h-20 focus:ring-hope-green focus:border-hope-green"
-                          {...field} 
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-
-              {/* Consent and Agreement */}
-              <div className="space-y-4">
-                <FormField
-                  control={form.control}
-                  name="registrationConsent"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                      <FormControl>
-                        <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                          className="data-[state=checked]:bg-hope-green data-[state=checked]:border-hope-green mt-1"
-                        />
-                      </FormControl>
-                      <div className="space-y-1 leading-none">
-                        <FormLabel className="text-sm text-medium-gray">
-                          I consent to Noah's Arc Care processing this information to provide services and support. *
-                        </FormLabel>
-                        <FormMessage />
-                      </div>
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="hipaaConsent"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                      <FormControl>
-                        <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                          className="data-[state=checked]:bg-hope-green data-[state=checked]:border-hope-green mt-1"
-                        />
-                      </FormControl>
-                      <div className="space-y-1 leading-none">
-                        <FormLabel className="text-sm text-medium-gray">
-                          I acknowledge and agree to the HIPAA privacy practices and information sharing necessary for care coordination. *
-                        </FormLabel>
-                        <FormMessage />
-                      </div>
-                    </FormItem>
-                  )}
-                />
-              </div>
-
-              <Button 
-                type="submit" 
-                disabled={registrationMutation.isPending}
-                className="w-full bg-hope-green text-white hover:bg-green-700 py-4"
+        {/* What to Prepare */}
+        <div className="bg-white rounded-2xl shadow-lg p-8">
+          <h3 className="text-2xl font-bold text-dark-gray mb-6 text-center">What to Prepare</h3>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h4 className="text-lg font-semibold text-dark-gray mb-4">Client Information</h4>
+              <ul className="text-sm text-medium-gray space-y-2">
+                <li>• Client's full name and date of birth</li>
+                <li>• Insurance information (if applicable)</li>
+                <li>• Medical history and current medications</li>
+                <li>• Special needs or support requirements</li>
+                <li>• Goals and aspirations for care</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-lg font-semibold text-dark-gray mb-4">Contact Information</h4>
+              <ul className="text-sm text-medium-gray space-y-2">
+                <li>• Primary contact person's name</li>
+                <li>• Relationship to the client</li>
+                <li>• Phone number and email address</li>
+                <li>• Preferred contact method</li>
+                <li>• Best times to reach you</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="mt-8 p-6 bg-purple-50 rounded-lg text-center">
+            <h4 className="text-lg font-semibold text-dark-gray mb-3">Ready to Get Started?</h4>
+            <p className="text-medium-gray mb-4">
+              Contact us today to begin your registration process. Our team is ready to help you take the first step toward quality care.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a 
+                href="tel:(615) 782-1842"
+                className="inline-flex items-center justify-center px-6 py-3 bg-hope-green text-white rounded-lg hover:bg-green-700 transition-colors"
               >
-                {registrationMutation.isPending ? "Submitting..." : "Submit Registration"}
-              </Button>
-            </form>
-          </Form>
+                <Phone className="h-4 w-4 mr-2" />
+                Call (615) 782-1842
+              </a>
+              <a 
+                href="mailto:bneway@noahsarccare.com"
+                className="inline-flex items-center justify-center px-6 py-3 bg-royal-purple text-white rounded-lg hover:bg-purple-700 transition-colors"
+              >
+                <Mail className="h-4 w-4 mr-2" />
+                Email Us
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
